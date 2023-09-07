@@ -1,7 +1,16 @@
 import { TextField } from "@mui/material";
 
 const AppInput = (props) => {
-  const { name, value, placeholder, label, sx = {}, height } = props;
+  const {
+    name,
+    value,
+    placeholder,
+    label,
+    sx = {},
+    height,
+    onChange,
+    ...restProps
+  } = props;
 
   const getHeight = () => {
     switch (height) {
@@ -31,7 +40,6 @@ const AppInput = (props) => {
         };
     }
   };
-  console.log(getHeight());
   return (
     <>
       <TextField
@@ -41,13 +49,15 @@ const AppInput = (props) => {
         label={label}
         value={value}
         placeholder={placeholder}
+        onChange={onChange}
+        {...restProps}
         // sx={{
 
         // }}
         InputProps={{
           sx: {
             ".MuiFormLabel-root": {
-              "&.MuiInputLabel-root": {
+              ".MuiInputLabel-root": {
                 color: "red",
                 transform: `${getHeight()?.transform} !important`,
               },
@@ -63,10 +73,6 @@ const AppInput = (props) => {
                 borderBottom: "none",
               },
             },
-            // "&.MuiFormLabel-root": {
-
-            // },
-
             ".MuiFilledInput-input": {
               paddingTop: `${getHeight()?.paddingTop}  !important`,
               paddingBottom: `${getHeight()?.paddingBottom} !important`,
