@@ -1,4 +1,4 @@
-import { Button, Box } from "@mui/material";
+import { Box } from "@mui/material";
 import "./App.css";
 import AppCheckbox from "./components/AppCheckbox";
 import AppInput from "./components/AppInput";
@@ -102,14 +102,12 @@ function App() {
   ];
   return (
     <div>
-      <h1 className="text-[red]">Testing</h1>
       <AppInput
         name="email"
         placeholder="Email"
         label="Email"
         height="extra-large"
       />
-      <Button>Hello</Button>
       <AppTag text="draft" />
       <AppCheckbox label="Agree to terms and condition" />
       <AppSelect
@@ -127,7 +125,7 @@ function App() {
         data={[]}
         title="Computers"
         // loading={loading}
-        dataLength={[]?.length}
+        dataLength={[1, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]?.length}
         noPerPage={6}
         page={1}
         // onPageChange={handlePageChange}
