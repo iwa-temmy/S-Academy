@@ -1,6 +1,4 @@
-import React from 'react';
 import { TableBody } from '@mui/material';
-
 // core components
 import AppTableRow from './AppTableRow';
 import EmptyTable from './EmptyTable';
