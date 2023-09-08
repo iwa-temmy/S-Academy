@@ -30,13 +30,13 @@ const AppInput = (props) => {
         return {
           paddingTop: "25px",
           paddingBottom: "8px",
-          transform: "translate(12px, 13px) scale(1)",
+          transform: "translate(12px, 19px) scale(1)",
         };
       case "extra-large":
         return {
           paddingTop: "29px",
           paddingBottom: "12px",
-          transform: "translate(12px, 13px) scale(1)",
+          transform: "translate(12px, 22px) scale(1)",
         };
     }
   };
@@ -51,21 +51,19 @@ const AppInput = (props) => {
         placeholder={placeholder}
         onChange={onChange}
         {...restProps}
-        // sx={{
-
-        // }}
+        sx={{
+          "&.MuiInputLabel-root": {
+            transform: `${getHeight()?.transform}`,
+          },
+        }}
         InputProps={{
           sx: {
-            ".MuiFormLabel-root": {
-              ".MuiInputLabel-root": {
-                color: "red",
-                transform: `${getHeight()?.transform} !important`,
-              },
-            },
             "&.MuiFilledInput-root": {
-              backgroundColor: "transparent",
+              backgroundColor: "transparent !important",
               border: "1px solid #E1E2EC",
               borderRadius: "4px",
+              width: "100%",
+
               "&::before, &::after": {
                 borderBottom: "none",
               },

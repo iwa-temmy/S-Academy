@@ -6,6 +6,7 @@ import AppSelect from "./components/AppSelect";
 import AppTag from "./components/AppTag";
 import { useTheme } from "@mui/styles";
 import AppTable from "./components/app-table";
+import AppTextEditor from "./components/AppTextEditor";
 
 function App() {
   const theme = useTheme();
@@ -101,11 +102,12 @@ function App() {
     },
   ];
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center my-10 ">
       <AppInput
         name="email"
         placeholder="Email"
         label="Email"
+        type="email"
         height="extra-large"
       />
       <AppTag text="draft" />
@@ -132,6 +134,8 @@ function App() {
         search={true}
         // onSearch={handleSearch}
       />
+
+      <AppTextEditor />
     </div>
   );
 }
