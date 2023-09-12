@@ -17,7 +17,10 @@ const AppModal = (props) => {
         direction="row"
         justifyContent="space-between"
         alignItems="center"
-        sx={{ px: "32px" }}
+        sx={{
+          mx: "32px",
+          borderBottom: `1px solid ${theme.palette.neutral[90]}`,
+        }}
       >
         <DialogTitle
           sx={{
@@ -32,7 +35,7 @@ const AppModal = (props) => {
         </DialogTitle>
         {hasCloseBtn && (
           <IconButton
-            sx={{ py: 1, color: theme.palette.neutral[60] }}
+            sx={{ py: 1, color: theme.palette.neutral[60], }}
             onClick={handleClose}
           >
             <Close />
