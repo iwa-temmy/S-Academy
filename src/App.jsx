@@ -1,15 +1,18 @@
-import { Box } from "@mui/material";
+import { useState } from "react";
 import "./App.css";
 import AppCheckbox from "./components/AppCheckbox";
 import AppInput from "./components/AppInput";
 import AppSelect from "./components/AppSelect";
 import AppTag from "./components/AppTag";
+import { Box } from "@mui/material";
 import { useTheme } from "@mui/styles";
 import AppTable from "./components/app-table";
 import AppTextEditor from "./components/AppTextEditor";
+import AppModal from "./components/AppModal";
 
 function App() {
   const theme = useTheme();
+  const [modalOpen, setModalOpen] = useState(false);
   const columns = [
     {
       title: "Owner",
@@ -136,6 +139,32 @@ function App() {
       />
 
       <AppTextEditor />
+      <button onClick={() => setModalOpen(true)}>Open Modal</button>
+      <AppModal
+        open={modalOpen}
+        handleClose={() => setModalOpen(false)}
+        title="Add topic content"
+        hasCloseBtn
+      >
+        <AppInput
+          name="email"
+          placeholder="Email"
+          label="Email"
+          type="email"
+          height="extra-large"
+        />
+        <AppTag text="draft" />
+        <AppCheckbox label="Agree to terms and condition" />
+        <AppSelect
+          label="Course Tutor"
+          defaultValue="Select your Course Tutor"
+          options={[
+            { name: "Ebenezer don", value: "Ebenezer don" },
+            { name: "Mosh Hamedami", value: "Mosh Hamedami" },
+          ]}
+          extraLarge
+        />
+      </AppModal>
     </div>
   );
 }
