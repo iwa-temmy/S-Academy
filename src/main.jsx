@@ -6,6 +6,7 @@ import theme from "./assets/theme/theme";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AdminLogin from "./views/auth/AdminLogin.jsx";
+import AdminResetPassword from "./views/auth/AdminResetPassword.jsx";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/login",
     element: <AdminLogin />,
+  },
+  {
+    path: "/admin/reset-password",
+    element: <AdminResetPassword />,
   },
 ]);
 

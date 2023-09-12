@@ -1,17 +1,13 @@
-import { Typography } from "@mui/material";
 import AppInput from "../../components/AppInput";
-import { Link } from "react-router-dom";
 import AppLoadingButton from "../../components/AppLoadingButton";
-
-import { useTheme } from "@mui/styles";
-import AuthFooter from "./components/AuthFooter";
 import Authheader from "./components/Authheader";
-const AdminLogin = () => {
+import { useTheme } from "@mui/styles";
+const AdminResetPassword = () => {
   const theme = useTheme();
   return (
     <div className="auth-container">
       <div className="flex flex-col items-center h-[90vh] lg:h-[73vh] w-11/12 lg:w-2/5 m-auto mt-6 relative">
-        <Authheader text="Sign In" />
+        <Authheader text="Reset password" />
         <form className="w-full pt-14 px-16 lg:px-20">
           <AppInput
             name="email"
@@ -20,19 +16,6 @@ const AdminLogin = () => {
             type="email"
             fullWidth
           />
-          <Typography
-            component={Link}
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              color: theme.palette.primary[40],
-              fontSize: "12px",
-              pt: 1.5,
-            }}
-            to="/admin/reset-password"
-          >
-            Forgot password
-          </Typography>
           <AppInput
             name="password"
             label="Password"
@@ -54,25 +37,10 @@ const AdminLogin = () => {
             }}
             large
           />
-          <div className="flex flex-row gap-2 justify-center pt-4">
-            <Typography
-              sx={{ fontSize: "12px", color: theme.palette.neutral[30] }}
-            >
-              Don&apos;t have an account
-            </Typography>
-            <Typography
-              component={Link}
-              sx={{ fontSize: "12px", color: theme.palette.primary[30] }}
-              to="/"
-            >
-              Sign up
-            </Typography>
-          </div>
         </form>
-        <AuthFooter />
       </div>
     </div>
   );
 };
 
-export default AdminLogin;
+export default AdminResetPassword;
