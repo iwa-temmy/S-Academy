@@ -3,7 +3,7 @@ import { useTheme } from "@mui/styles";
 import { Menu } from "@mui/icons-material";
 import UserDropdown from "./UserDropdown";
 const Header = (props) => {
-  const { openDrawer } = props;
+  const { openDrawer, title } = props;
   const theme = useTheme();
   return (
     <AppBar
@@ -44,7 +44,7 @@ const Header = (props) => {
               fontWeight: 700,
             }}
           >
-            index
+            {title}
           </Typography>
           {/* <AppBreadcrumbs crumbs={breadcrumbs} /> */}
         </Box>

@@ -4,14 +4,13 @@ import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 
 const SidebarListItem = (props) => {
   const theme = useTheme();
-  const { active = true, icon, text, link } = props;
+  const { active, icon, text, link } = props;
   let extraStyles = {};
   if (active) {
     extraStyles = {
       "&, &:hover": {
         backgroundColor: theme.palette.shades.activeMenu,
         color: theme.palette.shades.white,
-        borderRadius: "8px 0px 0px 8px",
         borderRight: "4px solid white",
       },
       "& .listItem__icon": {
@@ -29,6 +28,7 @@ const SidebarListItem = (props) => {
       },
       "& .listItem__icon": {
         color: theme.palette.primary[60],
+
       },
       "& .MuiListItemText-primary": {
         fontWeight: 500,
@@ -41,7 +41,6 @@ const SidebarListItem = (props) => {
       sx={{
         p: 0.8,
         py: 1,
-        borderRadius: 1,
         flexDirection: "column",
         alignItems: "center",
         ...extraStyles,
@@ -49,7 +48,7 @@ const SidebarListItem = (props) => {
       to={link}
       component={Link}
     >
-      <ListItemIcon className="listItem__icon" sx={{ minWidth: "fit-content" }}>
+      <ListItemIcon className="listItem__icon" sx={{ minWidth: "fit-content", }}>
         {icon}
       </ListItemIcon>
       <ListItemText primary={text} sx={{ "& span": { fontSize: 11 } }} />
