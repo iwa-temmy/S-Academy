@@ -6,6 +6,9 @@ import theme from "./assets/theme/theme";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AdminLogin from "./views/auth/AdminLogin.jsx";
+import UserLogin from "./views/auth/UserLogin";
+import UserSignup from "./views/auth/UserSignup";
+
 
 const router = createBrowserRouter([
   {
@@ -15,6 +18,14 @@ const router = createBrowserRouter([
   {
     path: "/admin/login",
     element: <AdminLogin />,
+  },
+  {
+    path: "/user/login",
+    element: <UserLogin />,
+  },
+  {
+    path: "/user/signup",
+    element: <UserSignup />,
   },
 ]);
 
