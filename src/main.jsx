@@ -7,6 +7,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AdminLogin from "./views/auth/AdminLogin.jsx";
 import AdminResetPassword from "./views/auth/AdminResetPassword.jsx";
+import Dashboard from "./views/admin/Dashboard/index.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/reset-password",
     element: <AdminResetPassword />,
+  },
+  {
+    path: "/admin/index",
+    element: <Dashboard />,
   },
 ]);
 
