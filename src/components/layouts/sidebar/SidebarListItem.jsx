@@ -11,7 +11,6 @@ const SidebarListItem = (props) => {
       "&, &:hover": {
         backgroundColor: theme.palette.shades.activeMenu,
         color: theme.palette.shades.white,
-        borderRight: "4px solid white",
       },
       "& .listItem__icon": {
         color: theme.palette.shades.white,
@@ -28,7 +27,6 @@ const SidebarListItem = (props) => {
       },
       "& .listItem__icon": {
         color: theme.palette.primary[60],
-
       },
       "& .MuiListItemText-primary": {
         fontWeight: 500,
@@ -43,15 +41,19 @@ const SidebarListItem = (props) => {
         py: 1,
         flexDirection: "column",
         alignItems: "center",
+        position: "relative",
         ...extraStyles,
       }}
       to={link}
       component={Link}
     >
-      <ListItemIcon className="listItem__icon" sx={{ minWidth: "fit-content", }}>
+      <ListItemIcon className="listItem__icon" sx={{ minWidth: "fit-content" }}>
         {icon}
       </ListItemIcon>
       <ListItemText primary={text} sx={{ "& span": { fontSize: 11 } }} />
+      {active && (
+        <span className="bg-white w-[4px] h-full top-0 right-0 absolute rounded-l-lg"></span>
+      )}
     </ListItemButton>
   );
 };
