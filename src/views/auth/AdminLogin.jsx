@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import AppInput from "../../components/AppInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AppLoadingButton from "../../components/AppLoadingButton";
 
 import { useTheme } from "@mui/styles";
@@ -8,6 +8,8 @@ import AuthFooter from "./components/AuthFooter";
 import Authheader from "./components/Authheader";
 const AdminLogin = () => {
   const theme = useTheme();
+
+  const history = useNavigate();
   return (
     <div className="auth-container">
       <div className="flex flex-col items-center h-[90vh] lg:h-[73vh] w-11/12 lg:w-2/5 m-auto mt-6 relative">
@@ -51,6 +53,9 @@ const AdminLogin = () => {
                 backgroundColor: theme.palette.primary[30],
                 color: theme.palette.shades.white,
               },
+            }}
+            onClick={() => {
+              history("/admin/index");
             }}
             large
           />
