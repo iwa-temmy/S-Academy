@@ -2,12 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 import AdminLogin from "../views/auth/AdminLogin.jsx";
 import AdminResetPassword from "../views/auth/AdminResetPassword.jsx";
 import UserResetPassword from "../views/auth/UserResetPassword";
-import UserDashboard from "../views/user/Dashboard/index.jsx";
+import UserLayout from "../components/layouts/UserLayout";
+import AdminDashboard from "../views/admin/Dashboard";
 import UserLogin from "../views/auth/UserLogin";
 import UserSignup from "../views/auth/UserSignup";
-import { userRoutes } from "./userRoutes";
 import { adminRoutes } from "./adminRoutes";
-import Website from '../views/website';
+import { userRoutes } from "./userRoutes";
+import Website from "../views/website";
 import App from "../App";
 
 export default createBrowserRouter([
@@ -41,12 +42,12 @@ export default createBrowserRouter([
       },
       {
         path: "/admin",
-        element: <UserDashboard />,
+        element: <AdminDashboard />,
         children: adminRoutes,
       },
       {
         path: "/user",
-        element: <UserDashboard />,
+        element: <UserLayout />,
         children: userRoutes,
       },
     ],
