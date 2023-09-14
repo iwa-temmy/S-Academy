@@ -1,6 +1,7 @@
 import App from "../App";
 import { GridView } from "@mui/icons-material";
 import { Course } from "@carbon/icons-react";
+import Dashboard from "../views/UsersApp/Dashboard/index";
 
 export const userRoutes = [
   {
@@ -10,7 +11,8 @@ export const userRoutes = [
     icon: GridView,
     breadcrumb: true,
     exact: false,
-    component: App,
+    component: Dashboard,
+    element: <Dashboard />
   },
   {
     path: "/user/courses",
