@@ -4,33 +4,8 @@ import App from "./App.jsx";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./assets/theme/theme";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AdminLogin from "./views/auth/AdminLogin.jsx";
-import AdminResetPassword from "./views/auth/AdminResetPassword.jsx";
-import Dashboard from "./views/admin/Dashboard/index.jsx";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "/admin/login",
-    element: <AdminLogin />,
-  },
-  {
-    path: "/admin/reset-password",
-    element: <AdminResetPassword />,
-  },
-  {
-    path: "/admin/index",
-    element: <Dashboard />,
-  },
-  {
-    path: "/admin/courses",
-    element: <Dashboard />,
-  },
-]);
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/RootRouter";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

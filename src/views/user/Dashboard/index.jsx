@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Header from "../../../components/layouts/header";
 import Sidebar from "../../../components/layouts/sidebar";
-import { adminRoutes } from "../../../routes/adminRoutes";
+import { userRoutes } from "../../../routes/userRoutes";
 import { useLocation } from "react-router-dom";
 
 const Dashboard = () => {
@@ -12,7 +12,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const getCurrentRoute = (key) =>
-      adminRoutes.find((route) => route?.key === key);
+      userRoutes.find((route) => route?.key === key);
     const current = getCurrentRoute(location.pathname.split("/")[2]);
     setCurrentRoute(current);
     // }
@@ -28,7 +28,7 @@ const Dashboard = () => {
       <Sidebar
         open={sideBarOpen}
         handleClose={closeSideBar}
-        routes={adminRoutes}
+        routes={userRoutes}
         current={currentRoute}
       />
       <Header openDrawer={openSideBar} title={currentRoute?.name} />

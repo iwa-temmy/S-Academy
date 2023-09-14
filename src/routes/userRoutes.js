@@ -2,9 +2,9 @@ import App from "../App";
 import { GridView } from "@mui/icons-material";
 import { Course } from "@carbon/icons-react";
 
-export const adminRoutes = [
+export const userRoutes = [
   {
-    path: "/admin/index",
+    path: "/user/index",
     key: "index",
     name: "Dashboard",
     icon: GridView,
@@ -13,7 +13,7 @@ export const adminRoutes = [
     component: App,
   },
   {
-    path: "/admin/courses",
+    path: "/user/courses",
     key: "courses",
     name: "My Courses",
     icon: Course,
@@ -22,27 +22,27 @@ export const adminRoutes = [
     component: App,
   },
   {
-    path: "/admin/index",
-    key: "wanda",
-    name: "Dashboard",
+    path: "/user/explore",
+    key: "explore",
+    name: "Explore",
     icon: GridView,
     breadcrumb: true,
     exact: false,
     component: App,
   },
   {
-    path: "/admin/index",
-    key: "cunt",
-    name: "Dashboard",
+    path: "/user/certificate",
+    key: "certificate",
+    name: "Certificate",
     icon: GridView,
     breadcrumb: true,
     exact: false,
     component: App,
   },
   {
-    path: "/admin/index",
-    key: "shinra",
-    name: "Dashboard",
+    path: "/user/settings",
+    key: "settings",
+    name: "Settings",
     icon: GridView,
     breadcrumb: true,
     exact: false,

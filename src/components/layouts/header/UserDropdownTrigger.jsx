@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Box,
   Stack,
@@ -19,6 +19,7 @@ const UserDropdownTrigger = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
   const history = useNavigate();
+  const location = useLocation();
 
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -30,7 +31,11 @@ const UserDropdownTrigger = () => {
 
   const logout = () => {
     handleClose();
-    history("/admin/login");
+    if (location.pathname?.includes("user")) {
+      history("user/login");
+    } else {
+      history("/admin/login");
+    }
   };
 
   return (
@@ -65,7 +70,7 @@ const UserDropdownTrigger = () => {
                 color: theme.palette.primary.main,
               }}
             >
-              Administrator
+              {location.pathname?.includes("user") ? "User" : "Administrator"}
             </Typography>
           </Stack>
           <ExpandMore color="primary" />
