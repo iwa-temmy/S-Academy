@@ -1,18 +1,14 @@
-import Logo from "../../assets/img/logo.svg";
 import { Typography } from "@mui/material";
 import AppInput from "../../components/AppInput";
 import { Link } from "react-router-dom";
 import AppLoadingButton from "../../components/AppLoadingButton";
-import AuhComponent from "../../components/AuthComponent";
+import AuhComponent from "./components/AuthComponent";
 
 import { useTheme } from "@mui/styles";
 const UserLogin = () => {
   const theme = useTheme();
   return (
-    <AuhComponent>
-      <img src={Logo} alt="logo" className="w-[48px]" />
-      <Typography>Sign In</Typography>
-
+    <AuhComponent text="Sign In">
       <form className="w-full px-24 pt-20">
         <AppInput
           name="email"
@@ -21,19 +17,19 @@ const UserLogin = () => {
           type="email"
           fullWidth
         />
-        <Typography
-          component={Link}
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-            fontSize: "12px",
-            mt: 1,
-            color: theme.palette.primary[40],
-          }}
-          to="/"
-        >
-          Forgot password
-        </Typography>
+          <Typography
+            component={Link}
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              color: theme.palette.primary[40],
+              fontSize: "12px",
+              pt: 1.5,
+            }}
+            to="/user/reset-password"
+          >
+            Forgot password
+          </Typography>
         <AppInput
           name="password"
           label="Password"
@@ -48,6 +44,10 @@ const UserLogin = () => {
             width: "100%",
             color: theme.palette.shades.white,
             mt: 2,
+            "&:hover": {
+              backgroundColor: theme.palette.primary[30],
+              color: theme.palette.shades.white,
+            },
           }}
           large
         />

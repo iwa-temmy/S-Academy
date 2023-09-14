@@ -18,7 +18,7 @@ const SocialLogin = () => {
     <div>
       <Box
         sx={{ display: "flex", alignItems: "center" }}
-        className="w-full px-24 py-10"
+        className="w-full px-24 py-5"
       >
         <Divider sx={{ width: "45%" }} />
         <Typography sx={{ mx: 1 }}>OR</Typography>

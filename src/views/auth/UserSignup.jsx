@@ -1,19 +1,15 @@
-import Logo from "../../assets/img/logo.svg";
 import { Typography } from "@mui/material";
 import AppInput from "../../components/AppInput";
 import { Link } from "react-router-dom";
 import AppLoadingButton from "../../components/AppLoadingButton";
-import AuhComponent from "../../components/AuthComponent";
+import AuhComponent from "./components/AuthComponent";
 
 import { useTheme } from "@mui/styles";
 import AppSelect from "../../components/AppSelect";
 const UserLogin = () => {
   const theme = useTheme();
   return (
-    <AuhComponent>
-      <img src={Logo} alt="logo" className="w-[48px] " />
-      <Typography>Create an account</Typography>
-
+    <AuhComponent text="Create an account">
       <form className="w-full px-24 pt-20">
         <AppInput
           name="first_name"
@@ -65,6 +61,10 @@ const UserLogin = () => {
             width: "100%",
             color: theme.palette.shades.white,
             mt: 2,
+            "&:hover": {
+              backgroundColor: theme.palette.primary[30],
+              color: theme.palette.shades.white,
+            },
           }}
           large
         />
