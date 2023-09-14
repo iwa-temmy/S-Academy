@@ -1,14 +1,11 @@
-import { Box, Divider, Typography, useTheme } from "@mui/material";
+import { Box, Button, Divider, Typography } from "@mui/material";
 import React from "react";
-import { GoogleLogin } from "react-google-login";
+import { GoogleLogin } from "@react-oauth/google";
 import MicrosoftLogin from "react-microsoft-login";
+import { useTheme } from "@mui/styles";
 
 const SocialLogin = () => {
   const theme = useTheme();
-
-  const responseGoogle = (response) => {
-    console.log(response);
-  };
   const authHandler = (err, data) => {
     console.log(err, data);
   };
@@ -24,38 +21,36 @@ const SocialLogin = () => {
       </Box>
       <Box className="w-full px-24">
         <GoogleLogin
-          clientId="671348139606-906f7lcl8vk6l26hivc1ka0hk2teuvb1.apps.googleusercontent.com"
-          render={(renderProps) => (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                border: `1px solid ${theme.palette.gray[90]}`,
-                borderRadius: 1,
-                py: 1,
-              }}
-            >
-              <img src={"/icons/GoogleIcon.svg"} />
-              <button
-                className="ml-1"
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                style={{ color: "#77777A", fontSize: "12px" }}
-              >
-                Continue with google
-              </button>
-            </Box>
-          )}
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={"single_host_origin"}
-          style={{ backgroundColor: "none" }}
+          text="continue_with"
+          logo_alignment="center"
+          useOneTap
+          onSuccess={(credentialResponse) => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
         />
       </Box>
-      <Box className="w-full px-24">
+      <Box className="w-full px-24 mt-6">
         <MicrosoftLogin
-          clientId="671348139606-906f7lcl8vk6l26hivc1ka0hk2teuvb1.apps.googleusercontent.com"
+          clientId="ef6d8c0c-4968-4c20-866e-ac765ee9ea15"
           authCallback={authHandler}
+          children={
+            <Button
+              variant="outlined"
+              sx={{
+                textTransform: "inherit",
+                width: "100%",
+                borderColor: theme.palette.gray[90],
+                color: theme.palette.neutral[50],
+                py: 0.8,
+              }}
+              startIcon={<img src={"/icons/MicrosoftIcon.svg"} width="20" />}
+            >
+              Continue with Microsoft
+            </Button>
+          }
         />
       </Box>
     </div>

@@ -33,3 +33,7 @@ body {
   font-style: normal !important;
   color: #5e5e62 !important;
 }
+.ms_login {
+  width: 100% !important;
+  margin-top: 1rem;
+}
