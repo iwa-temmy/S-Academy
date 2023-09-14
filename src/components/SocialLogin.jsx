@@ -2,8 +2,6 @@ import { Box, Divider, Typography, useTheme } from "@mui/material";
 import React from "react";
 import { GoogleLogin } from "react-google-login";
 import MicrosoftLogin from "react-microsoft-login";
-import GoogleIcon from "../assets/icons/GoogleIcon.svg";
-import MicrosoftIcon from "../assets/icons/MicrosoftIcon.svg";
 
 const SocialLogin = () => {
   const theme = useTheme();
@@ -37,7 +35,7 @@ const SocialLogin = () => {
                 py: 1,
               }}
             >
-              <img src={GoogleIcon} />
+              <img src={"/icons/GoogleIcon.svg"} />
               <button
                 className="ml-1"
                 onClick={renderProps.onClick}

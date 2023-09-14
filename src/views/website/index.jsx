@@ -8,6 +8,7 @@ import { useTheme } from "@mui/styles";
 import AppTable from "../../components/app-table";
 import AppTextEditor from "../../components/AppTextEditor";
 import AppModal from "../../components/AppModal";
+import LandingPage from './LandingPage';
 
 const Index = () => {
   const theme = useTheme();
@@ -104,7 +105,8 @@ const Index = () => {
     },
   ];
   return (
-    <div className="flex flex-col justify-center items-center my-10 ">
+    <div className="flex flex-col justify-center items-center my-10">
+        {/* <LandingPage /> */}
       <AppInput
         name="email"
         placeholder="Email"
