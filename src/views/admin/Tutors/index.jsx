@@ -7,10 +7,13 @@ import TableAction from "../../../components/app-table/TableAction";
 import { all_tutors, STATUS_OPTIONS } from "./util";
 import AppOpaqueTag from "../../../components/AppOpaqueTag";
 import AppFilterSelect from "../../../components/app-table/AppFilterSelect";
-
+import { AddCircleOutline } from "@mui/icons-material";
 //hooks
 import useSearch from "../../../hooks/useSearch";
 import { formatAmount } from "../../../utils/utils";
+import ViewDetailsDrawer from "./ViewDetailsDrawer";
+import AppButton from "../../../components/AppButton";
+import CreateTutorDrawer from "./CreateTutorDrawer";
 const NO_PER_PAGE = 8;
 const Tutors = () => {
   // state
@@ -18,6 +21,10 @@ const Tutors = () => {
   const [tutors, setTutors] = useState([]);
   const [selected, setSelected] = useState(new Set());
   const [filters, setFilters] = useState({ status: "" });
+  const [viewDrawerOpen, setViewDrawerOpen] = useState(false);
+  const [drawerPayload, setDrawerPayload] = useState({});
+  const [createModalOpen, setCreateModalOpen] = useState(false);
+
   //hooks
   const theme = useTheme();
   const { data, handleSearch } = useSearch(all_tutors, ["name", "email"]);
@@ -41,6 +48,24 @@ const Tutors = () => {
   const handleFilter = (e) => {
     const { name, value } = e.target;
     setFilters({ ...filters, [name]: value });
+  };
+
+  const openViewMDrawer = (data) => {
+    setViewDrawerOpen(true);
+    setDrawerPayload(data);
+  };
+  const closeViewDrawer = () => {
+    setViewDrawerOpen(false);
+    setTimeout(() => {
+      setDrawerPayload({});
+    }, 1000);
+  };
+
+  const openCreateModal = () => {
+    setCreateModalOpen(true);
+  };
+  const closeCreateModal = () => {
+    setCreateModalOpen(false);
   };
   //table props
   const columns = [
@@ -113,7 +138,6 @@ const Tutors = () => {
           <AppOpaqueTag
             label={row?.status}
             type={row?.status === "active" ? "success" : "error"}
-            hasIcon={true}
           />
         </>
       ),
@@ -127,7 +151,7 @@ const Tutors = () => {
             items={[
               {
                 label: "View more details",
-                action: () => console.log("view", row),
+                action: () => openViewMDrawer(row),
               },
               {
                 label: "Deactivate tutor",
@@ -175,6 +199,31 @@ const Tutors = () => {
             />
           </>
         }
+        actions={
+          <AppButton
+            name="Create Tutor"
+            color="primary"
+            icon={<AddCircleOutline />}
+            sx={{
+              background: theme.palette.primary[20],
+              color: theme.palette.shades.white,
+              "&:hover": {
+                background: theme.palette.primary[20],
+                color: theme.palette.shades.white,
+              },
+            }}
+            onClick={() => openCreateModal()}
+          />
+        }
+      />
+      <ViewDetailsDrawer
+        open={viewDrawerOpen}
+        handleClose={closeViewDrawer}
+        payload={drawerPayload}
+      />
+      <CreateTutorDrawer
+        open={createModalOpen}
+        handleClose={closeCreateModal}
       />
     </div>
   );
