@@ -15,6 +15,8 @@ const AdminResetPassword = () => {
             label="Old Password"
             height="large"
             type="password"
+            variant="filled"
+            large
             fullWidth
             sx={{ my: 1 }}
           />
@@ -23,13 +25,16 @@ const AdminResetPassword = () => {
             label="New Password"
             height="large"
             type="password"
+            variant="filled"
+            large
             fullWidth
             sx={{ my: 1 }}
           />
           <AppInput
             name="confirm_password"
             label="Confirm Password"
-            height="large"
+            variant="filled"
+            large
             type="password"
             fullWidth
             sx={{ my: 1 }}

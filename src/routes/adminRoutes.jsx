@@ -1,6 +1,9 @@
 import App from "../App";
 import { GridView } from "@mui/icons-material";
 import { Course } from "@carbon/icons-react";
+import AdminDashboard from "../views/admin/Dashboard";
+import Courses from "../views/admin/Courses";
+import Tutors from "../views/admin/Tutors";
 
 export const adminRoutes = [
   {
@@ -10,7 +13,7 @@ export const adminRoutes = [
     icon: GridView,
     breadcrumb: true,
     exact: false,
-    component: App,
+    element: <AdminDashboard />,
   },
   {
     path: "/admin/courses",
@@ -19,33 +22,33 @@ export const adminRoutes = [
     icon: Course,
     breadcrumb: true,
     exact: false,
-    component: App,
+    element: <Courses />,
   },
   {
-    path: "/admin/index",
-    key: "wanda",
-    name: "Dashboard",
+    path: "/admin/learners",
+    key: "learners",
+    name: "Learners",
     icon: GridView,
     breadcrumb: true,
     exact: false,
-    component: App,
+    element: App,
   },
   {
-    path: "/admin/index",
-    key: "cunt",
-    name: "Dashboard",
+    path: "/admin/tutors",
+    key: "tutors",
+    name: "Tutors",
     icon: GridView,
     breadcrumb: true,
     exact: false,
-    component: App,
+    element: <Tutors />,
   },
   {
-    path: "/admin/index",
-    key: "shinra",
-    name: "Dashboard",
+    path: "/admin/settings",
+    key: "settings",
+    name: "Settings",
     icon: GridView,
     breadcrumb: true,
     exact: false,
-    component: App,
+    element: App,
   },
 ];

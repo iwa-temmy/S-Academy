@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import Header from "./header";
 import Sidebar from "./sidebar";
-import { userRoutes } from "../../routes/userRoutes";
 import { Outlet, useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
+import { adminRoutes } from "../../routes/adminRoutes";
 
-const UserLayout = () => {
+const AdminLayout = () => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [currentRoute, setCurrentRoute] = useState(null);
 
@@ -13,7 +13,7 @@ const UserLayout = () => {
 
   useEffect(() => {
     const getCurrentRoute = (key) =>
-      userRoutes.find((route) => route?.key === key);
+      adminRoutes.find((route) => route?.key === key);
     const current = getCurrentRoute(location.pathname.split("/")[2]);
     setCurrentRoute(current);
     // }
@@ -29,7 +29,7 @@ const UserLayout = () => {
       <Sidebar
         open={sideBarOpen}
         handleClose={closeSideBar}
-        routes={userRoutes}
+        routes={adminRoutes}
         current={currentRoute}
       />
       <Header openDrawer={openSideBar} title={currentRoute?.name} />
@@ -38,6 +38,7 @@ const UserLayout = () => {
           width: {
             md: "calc(100% - 120px)",
           },
+          p: 3,
           ml: { md: 15 },
           mt: { xs: "70px", md: "66px" },
           maxWidth: "100%",
@@ -52,10 +53,12 @@ const UserLayout = () => {
           backgroundColor: "#f8f9fe",
         }}
       >
-        <Outlet />
+        <Box sx={{ height: "100%" }}>
+          <Outlet />
+        </Box>
       </Box>
     </div>
   );
 };
 
-export default UserLayout;
+export default AdminLayout;
