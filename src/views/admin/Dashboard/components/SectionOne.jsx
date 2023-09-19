@@ -52,7 +52,7 @@ const SectionOne = () => {
               color: theme.palette.shades.white,
             },
           }}
-          onClick={() => navigate("/admin/tutors")}
+          onClick={() => navigate("/admin/courses")}
         />
       </Box>
       <img
