@@ -13,7 +13,7 @@
     "@carbon/icons-react": "^11.26.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.11.0",
+    "@mui/icons-material": "^5.14.9",
     "@mui/lab": "^5.0.0-alpha.143",
     "@mui/material": "^5.14.7",
     "@mui/styles": "^5.14.7",
@@ -23,8 +23,7 @@
     "react-dom": "^18.2.0",
     "react-microsoft-login": "^2.0.1",
     "react-quill": "^2.0.0",
-    "react-router-dom": "^6.15.0",
-    "styled-icons": "^10.47.0"
+    "react-router-dom": "^6.15.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
