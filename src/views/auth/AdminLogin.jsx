@@ -18,8 +18,9 @@ const AdminLogin = () => {
           <AppInput
             name="email"
             label="Email"
-            height="large"
+            large
             type="email"
+            variant="filled"
             fullWidth
           />
           <Typography
@@ -38,7 +39,8 @@ const AdminLogin = () => {
           <AppInput
             name="password"
             label="Password"
-            height="large"
+            large
+            variant="filled"
             type="password"
             fullWidth
           />
