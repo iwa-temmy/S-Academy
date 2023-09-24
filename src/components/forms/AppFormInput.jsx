@@ -22,14 +22,14 @@ const AppFormInput = (props) => {
       <AppInput
         value={value}
         onChange={onChange}
-        error={!value[name] && errors[name]}
+        // error={!value[name] && errors[name]}
         multiline={multiline}
         adornment={adornment}
         {...restProps}
       />
-      {!value[name] && errors[name] && (
+      {/* {!value[name] && errors[name] && (
         <FormHelperText error>{formatSentence(errors[name]?.replace(/_/g, ' '))}</FormHelperText>
-      )}
+      )} */}
     </>
   );
 };

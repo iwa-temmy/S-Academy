@@ -1,5 +1,5 @@
 import { useTheme } from '@mui/material';
-import AppSelect from 'components/AppSelect';
+import AppSelect from '../AppSelect';
 
 const AppFilterSelect = (props) => {
     const { sx, menuProps, ...otherProps } = props;

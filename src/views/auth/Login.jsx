@@ -42,7 +42,7 @@ const UserLogin = () => {
         dispatch(getUser(res?.data?.user));
         setToken(res?.data?.token);
         setType("type", res?.data?.user?.user_type);
-        navigate("/user/index", { replace: true });
+        navigate("/user/index");
       } else {
         toast.error(
           <Notification

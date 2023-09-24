@@ -9,6 +9,7 @@ import { getType, getUserToken } from "../utils";
 
 const auth = getUserToken();
 const type = getType("type");
+
 export default createBrowserRouter([
   {
     path: "/",
@@ -19,19 +20,9 @@ export default createBrowserRouter([
         element: <Website />,
       },
       {
-        path:
-          auth && type === "student"
-            ? "/user"
-            : auth && type === "admin"
-            ? "/admin"
-            : "/auth",
-        element: auth ? <PrivateRoute /> : <Outlet />,
-        children:
-          auth && type === "student"
-            ? userRoutes
-            : auth && type === "admin"
-            ? adminRoutes
-            : AuthRouter,
+        path: "/auth",
+        element: <Outlet />,
+        children: AuthRouter,
       },
       {
         path: "/admin",

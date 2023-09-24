@@ -37,3 +37,8 @@ body {
   width: 100% !important;
   margin-top: 1rem;
 }
+
+:where(.css-dev-only-do-not-override-1vr7spz).ant-upload-wrapper
+  .ant-upload-drag {
+  background-color: transparent !important;
+}

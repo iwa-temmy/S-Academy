@@ -85,7 +85,6 @@ export const VerifyLoggedInUser = async (credentials) => {
 export const Logout = async () => {
   try {
     const res = await axiosInstance().post(`${baseUrl}/users/logout/`);
-    console.log({ res });
     if (res?.status?.toLowerCase() !== "success")
       throw new Error(data?.message);
     endSession();
