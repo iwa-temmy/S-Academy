@@ -1,14 +1,24 @@
 import { Box, Button, Divider, Typography } from "@mui/material";
 import React from "react";
-import { GoogleLogin } from "@react-oauth/google";
-import MicrosoftLogin from "react-microsoft-login";
-import { useTheme } from "@mui/styles";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 const SocialLogin = () => {
-  const theme = useTheme();
-  const authHandler = (err, data) => {
-    console.log(err, data);
-  };
+  const login = useGoogleLogin({
+    onSuccess: async (response) => {
+      try {
+        const res = await axios.get(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: { Authorization: `Bearer  ${response.access_token}` },
+          }
+        );
+        console.log({ res });
+      } catch (err) {
+        console.log("err");
+      }
+    },
+  });
   return (
     <div>
       <Box
@@ -20,38 +30,24 @@ const SocialLogin = () => {
         <Divider sx={{ width: "45%" }} />
       </Box>
       <Box className="w-full px-24">
-        <GoogleLogin
-          text="continue_with"
-          logo_alignment="center"
-          useOneTap
-          onSuccess={(credentialResponse) => {
-            console.log(credentialResponse);
+        <Button
+          variant="outlined"
+          onClick={() => login()}
+          startIcon={<img src="/icons/GoogleIcon.svg" alt="GoogleIcon" />}
+          sx={{
+            textTransform: "unset",
+            borderColor: "#E1E2EC",
+            color: "#77777A",
+            width: "100%",
+            height: "40px",
+            "&:hover": {
+              backgroundColor: "#FFFFFF",
+              borderColor: "#E1E2EC",
+            },
           }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
-        />
-      </Box>
-      <Box className="w-full px-24 mt-6">
-        <MicrosoftLogin
-          clientId="ef6d8c0c-4968-4c20-866e-ac765ee9ea15"
-          authCallback={authHandler}
-          children={
-            <Button
-              variant="outlined"
-              sx={{
-                textTransform: "inherit",
-                width: "100%",
-                borderColor: theme.palette.gray[90],
-                color: theme.palette.neutral[50],
-                py: 0.8,
-              }}
-              startIcon={<img src={"/icons/MicrosoftIcon.svg"} width="20" />}
-            >
-              Continue with Microsoft
-            </Button>
-          }
-        />
+        >
+          Continue with google
+        </Button>
       </Box>
     </div>
   );

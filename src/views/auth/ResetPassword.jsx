@@ -6,9 +6,9 @@ import { useTheme } from "@mui/material";
 const UserResetPassword = () => {
   const theme = useTheme();
   return (
-    <div className="auth-container">
+    <div className="auth-container" type='reset_password'>
       <div className="flex flex-col items-center h-[90vh] lg:h-[73vh] w-11/12 lg:w-2/5 m-auto mt-6 relative">
-        <Authheader text="Reset Password" />
+        <Authheader text="Forget Password" />
         <form className="w-full pt-14 px-16 lg:px-20">
           <AppInput
             name="old_password"

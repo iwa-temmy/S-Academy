@@ -1,16 +1,14 @@
-import { createBrowserRouter } from "react-router-dom";
-import AdminLogin from "../views/auth/AdminLogin.jsx";
-import AdminResetPassword from "../views/auth/AdminResetPassword.jsx";
-import UserResetPassword from "../views/auth/UserResetPassword";
-import UserLayout from "../components/layouts/UserLayout";
-import AdminDashboard from "../views/admin/Dashboard";
-import UserLogin from "../views/auth/UserLogin";
-import UserSignup from "../views/auth/UserSignup";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import { adminRoutes } from "./adminRoutes";
 import { userRoutes } from "./userRoutes";
+import AuthRouter from "./authRouter";
 import Website from "../views/website";
 import App from "../App";
+import PrivateRoute from "../PrivateRoute.jsx";
+import { getType, getUserToken } from "../utils";
 
+const auth = getUserToken();
+const type = getType("type");
 export default createBrowserRouter([
   {
     path: "/",
@@ -21,33 +19,28 @@ export default createBrowserRouter([
         element: <Website />,
       },
       {
-        path: "/user/login",
-        element: <UserLogin />,
-      },
-      {
-        path: "/user/signup",
-        element: <UserSignup />,
-      },
-      {
-        path: "/admin/login",
-        element: <AdminLogin />,
-      },
-      {
-        path: "/admin/reset-password",
-        element: <AdminResetPassword />,
-      },
-      {
-        path: "/user/reset-password",
-        element: <UserResetPassword />,
+        path:
+          auth && type === "student"
+            ? "/user"
+            : auth && type === "admin"
+            ? "/admin"
+            : "/auth",
+        element: auth ? <PrivateRoute /> : <Outlet />,
+        children:
+          auth && type === "student"
+            ? userRoutes
+            : auth && type === "admin"
+            ? adminRoutes
+            : AuthRouter,
       },
       {
         path: "/admin",
-        element: <AdminDashboard />,
+        element: <PrivateRoute />,
         children: adminRoutes,
       },
       {
         path: "/user",
-        element: <UserLayout />,
+        element: <PrivateRoute />,
         children: userRoutes,
       },
     ],

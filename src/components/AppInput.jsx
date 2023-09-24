@@ -1,4 +1,7 @@
-import { TextField } from "@mui/material";
+import { useState } from "react";
+import { InputAdornment, IconButton, TextField } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useTheme } from "@mui/styles";
 
 const AppInput = (props) => {
   const {
@@ -9,8 +12,16 @@ const AppInput = (props) => {
     sx = {},
     height,
     onChange,
+    type,
     ...restProps
   } = props;
+
+  const theme = useTheme();
+  const [passwordType, setPasswordType] = useState("password");
+  const toggleShowPassword = () =>
+    setPasswordType((current) =>
+      current === "password" ? "text" : "password"
+    );
 
   const getHeight = () => {
     switch (height) {
@@ -40,6 +51,7 @@ const AppInput = (props) => {
         };
     }
   };
+
   return (
     <>
       <TextField
@@ -50,6 +62,7 @@ const AppInput = (props) => {
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        type={type === 'password' ? passwordType : type}
         {...restProps}
         sx={{
           "&.MuiInputLabel-root": {
@@ -77,6 +90,21 @@ const AppInput = (props) => {
             },
             ...sx,
           },
+          endAdornment: type === "password" && value && (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={toggleShowPassword}
+                edge="end"
+              >
+                {passwordType === "password" ? (
+                  <VisibilityOff sx={{ color: theme.palette.gray[900] }} />
+                ) : (
+                  <Visibility sx={{ color: theme.palette.gray[900] }} />
+                )}
+              </IconButton>
+            </InputAdornment>
+          ),
         }}
       />
     </>

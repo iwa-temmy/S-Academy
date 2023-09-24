@@ -72,9 +72,9 @@ const TabLayout = (props) => {
                     {tabs?.map((tab) => {
                         return (
                             <AppTab
-                                label={tab.name}
-                                id={tab.key}
-                                key={tab.key}
+                                label={tab?.name}
+                                id={tab?.key}
+                                key={tab?.key}
                                 disabled={tab?.disabled}
                                 component={link ? Link : 'button'}
                                 to={link && tab?.path}

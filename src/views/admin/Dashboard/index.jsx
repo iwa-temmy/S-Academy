@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import Header from "../../../components/layouts/header";
 import Sidebar from "../../../components/layouts/sidebar";
 import { adminRoutes } from "../../../routes/adminRoutes";
-import { useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import { Box } from "@mui/material";
 
 const Dashboard = () => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
@@ -31,7 +32,28 @@ const Dashboard = () => {
         routes={adminRoutes}
         current={currentRoute}
       />
-      <Header openDrawer={openSideBar} title={currentRoute?.name} />
+      <Header openDrawer={openSideBar} title={currentRoute?.name} /> 
+      <Box
+        sx={{
+          width: {
+            md: "calc(100% - 120px)",
+          },
+          ml: { md: 15 },
+          mt: { xs: "70px", md: "66px" },
+          maxWidth: "100%",
+          mb: "80px",
+          height: {
+            xs: "calc(100% - 70px)",
+            md: "calc(100% - 66px)",
+          },
+          overflow: "auto",
+          position: "fixed",
+          right: 0,
+          backgroundColor: "#f8f9fe",
+        }}
+      >
+        <Outlet />
+      </Box>
     </div>
   );
 };
