@@ -30,30 +30,31 @@ const UserLogin = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-      setLoading(true);
-      const body = {
-        email,
-        password: new_password,
-        first_name,
-        last_name,
-        user_type: "student",
-      };
-      const res = await RegisterUser(body);
-      setLoading(false);
-      if (res?.success) {
-        dispatch(getUser(res?.data));
-        navigate("/user/index");
-      } else {
-        toast.error(
-          <Notification
-            title="Something went wrong"
-            description={res?.message}
-          />
-        );
-      }
+    setLoading(true);
+    const body = {
+      email,
+      password: new_password,
+      first_name,
+      last_name,
+      user_type: "student",
+    };
+    const res = await RegisterUser(body);
+    setLoading(false);
+    if (res?.success) {
+      dispatch(getUser(res?.data));
+      navigate(`/auth/verify-email?user=${res?.data?.id}`);
+    } else {
+      toast.error(
+        <Notification title="Something went wrong" description={res?.message} />
+      );
+    }
   };
   return (
-    <AuhComponent title="Create an account" type="signup">
+    <AuhComponent
+      title="Create an account"
+      type="signup"
+      setLoading={setLoading}
+    >
       <div className="w-full px-24 pt-10">
         <AppForm onSubmit={handleSubmit}>
           <Box sx={{ mb: 2 }}>
@@ -62,6 +63,8 @@ const UserLogin = () => {
               label="First Name"
               height="large"
               type="text"
+              variant="filled"
+              medium
               fullWidth
               value={first_name}
               onChange={(event) => setFirstName(event.target.value)}
@@ -73,6 +76,8 @@ const UserLogin = () => {
               label="Last Name"
               height="large"
               type="text"
+              variant="filled"
+              medium
               fullWidth
               value={last_name}
               onChange={(event) => setLastName(event.target.value)}
@@ -84,6 +89,8 @@ const UserLogin = () => {
               label="Email"
               height="large"
               type="email"
+              variant="filled"
+              medium
               fullWidth
               value={email}
               onChange={(event) => setEmail(event.target.value)}
@@ -95,6 +102,8 @@ const UserLogin = () => {
               label="Password"
               height="large"
               type="password"
+              variant="filled"
+              medium
               fullWidth
               value={new_password}
               onChange={(event) => setNewPassword(event.target.value)}
@@ -107,6 +116,8 @@ const UserLogin = () => {
               height="large"
               type="password"
               fullWidth
+              variant="filled"
+              medium
               value={confirm_password}
               onChange={(event) => setConfirmPassword(event.target.value)}
             />

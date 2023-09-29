@@ -17,6 +17,8 @@ const SimpleTab = ({
   handleChange,
   handleRemoveSearch,
   value,
+  search,
+  sx
 }) => {
   function a11yProps(index) {
     return {
@@ -24,8 +26,6 @@ const SimpleTab = ({
       "aria-controls": `simple-tabpanel-${index}`,
     };
   }
-
-  console.log({ tab, tabs });
 
   return (
     <Box>
@@ -40,11 +40,11 @@ const SimpleTab = ({
           value={tab}
           onChange={handleTabChange}
           sx={{
-            mx: 3,
             "&.MuiTabs-root": {
               minHeight: "10px",
               maxHeight: "40px",
               px: 0,
+              ...sx,
             },
           }}
           TabIndicatorProps={{
@@ -77,6 +77,7 @@ const SimpleTab = ({
             );
           })}
         </Tabs>
+        {search &&
         <TextField
           variant="standard"
           placeholder="Type to search..."
@@ -99,7 +100,7 @@ const SimpleTab = ({
               </InputAdornment>
             ),
           }}
-        />
+        />}
       </Box>
       <Divider sx={{ mt: "-0.1rem", mx: 4.3 }} />
     </Box>

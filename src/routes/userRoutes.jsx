@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import { GridView } from "@mui/icons-material";
 import { Course } from "@carbon/icons-react";
 import Dashboard from "../views/UsersApp/Dashboard/index";
-import Courses from "../views/UsersApp/Courses/index";
+import Courses from "../views/UsersApp/Courses";
 import Settings from "../views/UsersApp/Settings/index";
 import CourseDetails from "../views/UsersApp/Courses/components/CourseView";
 

@@ -23,14 +23,6 @@ const AuthRouter = [
     path: "/auth/verify-email",
     element: <VerifyUser />,
   },
-  // {
-  //   path: "/auth/login",
-  //   element: <AdminLogin />,
-  // },
-  {
-    path: "/auth/reset-password",
-    element: <AdminResetPassword />,
-  },
   {
     path: "/auth/reset-password",
     element: <UserResetPassword />,

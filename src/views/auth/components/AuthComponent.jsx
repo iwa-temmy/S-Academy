@@ -4,7 +4,7 @@ import Authheader from "./Authheader";
 import { Typography } from "@mui/material";
 import { useTheme } from "@mui/system";
 
-const AuthComponent = ({ title, subTitle, type, children }) => {
+const AuthComponent = ({ title, subTitle, type, children, setLoading }) => {
   const theme = useTheme();
   return (
     <div className="auth-container">
@@ -33,9 +33,9 @@ const AuthComponent = ({ title, subTitle, type, children }) => {
         </Typography>
         {children}
         {type === "login" ? (
-          <AuthFooter />
+          <AuthFooter setLoading={setLoading} />
         ) : type === "signup" ? (
-          <AuthFooter />
+          <AuthFooter setLoading={setLoading} />
         ) : null}
       </div>
     </div>

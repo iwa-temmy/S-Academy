@@ -31,30 +31,34 @@ const UserLogin = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-      setLoading(true);
-      const body = {
-        email,
-        password,
-      };
-      const res = await LoginUser(body);
-      setLoading(false);
-      if (res?.success) {
-        dispatch(getUser(res?.data?.user));
-        setToken(res?.data?.token);
-        setType("type", res?.data?.user?.user_type);
+    setLoading(true);
+    const body = {
+      email,
+      password,
+    };
+    const res = await LoginUser(body);
+    setLoading(false);
+    if (res?.success) {
+      dispatch(getUser(res?.data?.user));
+      setToken(res?.data?.token);
+      setType("type", res?.data?.user?.user_type);
+      if (res?.data?.verified) {
         navigate("/user/index");
       } else {
-        toast.error(
-          <Notification
-            title="Something went wrong"
-            description="We couldn't validate your credentials. Try again!"
-          />
-        );
+        navigate(`/auth/verify-email?user=${res?.data?.user?.id}`);
       }
+    } else {
+      toast.error(
+        <Notification
+          title="Something went wrong"
+          description="We couldn't validate your credentials. Try again!"
+        />
+      );
+    }
   };
 
   return (
-    <AuhComponent title="Sign In" type="login">
+    <AuhComponent title="Sign In" type="login" setLoading={setLoading}>
       <div className="w-full px-24 pt-10">
         <AppForm onSubmit={handleSubmit}>
           <AppFormInput
@@ -62,6 +66,8 @@ const UserLogin = () => {
             label="Email"
             height="large"
             type="email"
+            variant='filled'
+            medium
             fullWidth
             value={email}
             onChange={(event) => setEmail(event.target.value)}
@@ -75,7 +81,7 @@ const UserLogin = () => {
               fontSize: "12px",
               pt: 1.5,
             }}
-            to="/user/forget-password"
+            to="/auth/forget-password"
           >
             Forgot password
           </Typography>
@@ -84,6 +90,8 @@ const UserLogin = () => {
             label="Password"
             height="large"
             type="password"
+            variant='filled'
+            medium
             fullWidth
             value={password}
             onChange={(event) => setPassword(event.target.value)}
@@ -116,7 +124,7 @@ const UserLogin = () => {
                 fontSize: "12px",
                 color: theme.palette.primary[40],
               }}
-              to="/user/signup"
+              to="/auth/signup"
             >
               Sign up
             </Typography>
