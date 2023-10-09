@@ -43,7 +43,6 @@ const AppInput = ({
     setPasswordType((current) =>
       current === "password" ? "text" : "password"
     );
-
   // Input Height Variant
   const heightValue = small || medium || large || extraLarge;
 

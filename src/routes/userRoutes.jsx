@@ -1,7 +1,10 @@
-import App from "../App";
+import { Navigate } from "react-router-dom";
 import { GridView } from "@mui/icons-material";
 import { Course } from "@carbon/icons-react";
 import Dashboard from "../views/UsersApp/Dashboard/index";
+import Courses from "../views/UsersApp/Courses/index";
+import Settings from "../views/UsersApp/Settings/index";
+import CourseDetails from "../views/UsersApp/Courses/components/CourseView";
 
 export const userRoutes = [
   {
@@ -12,16 +15,17 @@ export const userRoutes = [
     breadcrumb: true,
     exact: false,
     component: Dashboard,
-    element: <Dashboard />
+    element: <Dashboard />,
   },
   {
-    path: "/user/courses",
+    path: "/user/courses/",
     key: "courses",
     name: "My Courses",
     icon: Course,
     breadcrumb: true,
     exact: false,
-    component: App,
+    component: Courses,
+    element: <Courses />,
   },
   {
     path: "/user/explore",
@@ -30,7 +34,6 @@ export const userRoutes = [
     icon: GridView,
     breadcrumb: true,
     exact: false,
-    component: App,
   },
   {
     path: "/user/certificate",
@@ -39,7 +42,6 @@ export const userRoutes = [
     icon: GridView,
     breadcrumb: true,
     exact: false,
-    component: App,
   },
   {
     path: "/user/settings",
@@ -48,6 +50,5 @@ export const userRoutes = [
     icon: GridView,
     breadcrumb: true,
     exact: false,
-    component: App,
   },
 ];

@@ -8,6 +8,9 @@ const useSearch = (data, keys, getExFields) => {
     const handleSearch = (e) => {
         setKeyword(e.target.value);
     };
+    const handleRemoveSearch = (e) => {
+        setKeyword('');
+    };
     const isMatch = (string) => {
         return string.toLowerCase().includes(keyword.toLowerCase());
     };
@@ -33,7 +36,7 @@ const useSearch = (data, keys, getExFields) => {
         }
     }, [keyword, data]);
 
-    return { data: filteredData, handleSearch };
+    return { data: filteredData, handleSearch, handleRemoveSearch, keyword };
 };
 
 export default useSearch;

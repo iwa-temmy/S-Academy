@@ -31,11 +31,7 @@ const UserDropdownTrigger = () => {
 
   const logout = () => {
     handleClose();
-    if (location.pathname?.includes("user")) {
-      history("user/login");
-    } else {
-      history("/admin/login");
-    }
+      history("/auth/login");
   };
 
   return (

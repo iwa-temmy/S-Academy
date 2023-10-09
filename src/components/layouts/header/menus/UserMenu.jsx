@@ -9,20 +9,34 @@ import {
   Box,
 } from "@mui/material";
 import { Login } from "@mui/icons-material";
+import { Logout } from "../../../../redux/userSlice";
 
 // core components
 import AppMenuItem from "../../../app-menu/AppMenuItem";
+import Notification from "../../../Notification";
 
 import UserAvatar from "./UserAvatar";
+import { toast } from "react-toastify";
 
 const UserMenu = (props) => {
   const theme = useTheme();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { handleClose } = props;
 
-  const logout = () => {
+  const logout = async () => {
     handleClose();
-    history("/auth/admin/login");
+    const res = await Logout();
+    if (res?.success) {
+      toast.success(<Notification title="Success" description={res.message} />);
+      navigate("/auth/login");
+    } else {
+      toast.error(
+        <Notification
+          title="Something went wrong"
+          description="We couldn't validate your credentials. Try again!"
+        />
+      );
+    }
   };
 
   return (

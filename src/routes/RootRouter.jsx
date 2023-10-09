@@ -1,17 +1,15 @@
-import { createBrowserRouter } from "react-router-dom";
-import AdminLogin from "../views/auth/AdminLogin.jsx";
-import AdminResetPassword from "../views/auth/AdminResetPassword.jsx";
-import UserResetPassword from "../views/auth/UserResetPassword";
-import UserLayout from "../components/layouts/UserLayout";
-import UserLogin from "../views/auth/UserLogin";
-import UserSignup from "../views/auth/UserSignup";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import { adminRoutes } from "./adminRoutes";
 import { userRoutes } from "./userRoutes";
+import AuthRouter from "./authRouter";
 import Website from "../views/website";
 import App from "../App";
-import AdminLayout from "../components/layouts/AdminLayout.jsx";
+import PrivateRoute from "../PrivateRoute.jsx";
+import { getType, getUserToken } from "../utils";
 
-// eslint-disable-next-line react-refresh/only-export-components
+const auth = getUserToken();
+const type = getType("type");
+
 export default createBrowserRouter([
   {
     path: "/",
@@ -22,33 +20,18 @@ export default createBrowserRouter([
         element: <Website />,
       },
       {
-        path: "/user/login",
-        element: <UserLogin />,
-      },
-      {
-        path: "/user/signup",
-        element: <UserSignup />,
-      },
-      {
-        path: "/admin/login",
-        element: <AdminLogin />,
-      },
-      {
-        path: "/admin/reset-password",
-        element: <AdminResetPassword />,
-      },
-      {
-        path: "/user/reset-password",
-        element: <UserResetPassword />,
+        path: "/auth",
+        element: <Outlet />,
+        children: AuthRouter,
       },
       {
         path: "/admin",
-        element: <AdminLayout />,
+        element: <PrivateRoute />,
         children: adminRoutes,
       },
       {
         path: "/user",
-        element: <UserLayout />,
+        element: <PrivateRoute />,
         children: userRoutes,
       },
     ],

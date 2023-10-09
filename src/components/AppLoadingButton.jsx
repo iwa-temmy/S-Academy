@@ -1,6 +1,8 @@
 import { LoadingButton } from "@mui/lab";
+import { useTheme } from "@mui/styles";
 
 const AppLoadingButton = (props) => {
+  const theme = useTheme();
   const { text, sx, small, medium, large, extraLarge, upload, ...restProps } =
     props;
 
@@ -26,6 +28,7 @@ const AppLoadingButton = (props) => {
   }
   return (
     <LoadingButton
+       
       {...restProps}
       sx={{
         textTransform: "unset",
