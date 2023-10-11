@@ -1,56 +1,96 @@
-import AppInput from "../../components/AppInput";
-import Authheader from "./components/Authheader";
 import AppLoadingButton from "../../components/AppLoadingButton";
-import { useTheme } from "@mui/material";
+import { AppForm, AppFormInput } from "../../components/forms";
+import { toast } from "react-toastify";
+import Notification from "../../components/Notification";
+import AuhComponent from "./components/AuthComponent";
+import { Box, useTheme } from "@mui/material";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ResetPassword } from "../../redux/userSlice";
 
 const UserResetPassword = () => {
   const theme = useTheme();
+  const { search } = useLocation();
+  const navigate = useNavigate();
+  // states
+  const [new_password, setNewPassword] = useState("");
+  const [confirm_password, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const urlParams = Object.fromEntries([...new URLSearchParams(search)]);
+  const user_id = urlParams.user_id;
+  const confirmation_token = urlParams.confirmation_token;
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    const body = {
+      new_password,
+      confirm_password,
+    };
+    const res = await ResetPassword(body, user_id, confirmation_token);
+    setLoading(false);
+    if (res?.success) {
+      toast.success(
+        <Notification title="Success" description={res?.message} />
+      );
+      navigate("/auth/login");
+    } else {
+      toast.error(
+        <Notification title="Something went wrong" description={res?.message} />
+      );
+    }
+  };
+
   return (
-    <div className="auth-container" type='reset_password'>
-      <div className="flex flex-col items-center h-[90vh] lg:h-[73vh] w-11/12 lg:w-2/5 m-auto mt-6 relative">
-        <Authheader text="Forget Password" />
-        <form className="w-full pt-14 px-16 lg:px-20">
-          <AppInput
-            name="old_password"
-            label="Old Password"
-            height="large"
-            type="password"
-            fullWidth
-            sx={{ my: 1 }}
-          />
-          <AppInput
-            name="new_password"
-            label="New Password"
-            height="large"
-            type="password"
-            fullWidth
-            sx={{ my: 1 }}
-          />
-          <AppInput
-            name="confirm_password"
-            label="Confirm Password"
-            height="large"
-            type="password"
-            fullWidth
-            sx={{ my: 1 }}
-          />
+    <AuhComponent title="Sign In" type="login" setLoading={setLoading}>
+      <div className="w-full px-24 pt-10">
+        <AppForm
+          className="w-full pt-14 px-16 lg:px-20"
+          onSubmit={handleSubmit}
+        >
+          <Box sx={{ mb: 2 }}>
+            <AppFormInput
+              name="new_password"
+              label="New Password"
+              height="large"
+              type="password"
+              variant="filled"
+              medium
+              fullWidth
+              sx={{ my: 1 }}
+              value={new_password}
+              onChange={(event) => setNewPassword(event.target.value)}
+            />
+          </Box>
+          <Box sx={{ mb: 2 }}>
+            <AppFormInput
+              name="confirm_password"
+              label="Confirm Password"
+              height="large"
+              type="password"
+              variant="filled"
+              medium
+              fullWidth
+              sx={{ my: 1 }}
+              value={confirm_password}
+              onChange={(event) => setConfirmPassword(event.target.value)}
+            />
+          </Box>
           <AppLoadingButton
             text="Reset"
             sx={{
-              backgroundColor: theme.palette.primary[30],
               width: "100%",
-              color: theme.palette.shades.white,
               mt: 2,
-              "&:hover": {
-                backgroundColor: theme.palette.primary[30],
-                color: theme.palette.shades.white,
-              },
             }}
+            variant="contained"
+            loadingPosition="center"
+            type="submit"
             large
+            loading={loading}
           />
-        </form>
+        </AppForm>
       </div>
-    </div>
+    </AuhComponent>
   );
 };
 

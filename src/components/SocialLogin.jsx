@@ -1,23 +1,78 @@
 import { Box, Button, Divider, Typography } from "@mui/material";
-import { useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
+// import { useGoogleLogin } from "@react-oauth/google";
+// import axios from "axios";
 
-const SocialLogin = () => {
-  const login = useGoogleLogin({
-    onSuccess: async (response) => {
-      try {
-        const res = await axios.get(
-          "https://www.googleapis.com/oauth2/v3/userinfo",
-          {
-            headers: { Authorization: `Bearer  ${response.access_token}` },
-          }
-        );
-        console.log({ res });
-      } catch (err) {
-        console.log("err");
-      }
-    },
+import { initializeApp, getApps, getApp } from "firebase/app";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  setPersistence,
+  browserLocalPersistence,
+  // signOut,
+} from "firebase/auth";
+import { GoogleLogin, getUser } from "../redux/userSlice";
+import { toast } from "react-toastify";
+import Notification from "../components/Notification";
+import { useDispatch } from "react-redux";
+// Utils
+import { setToken, setType } from "../utils";
+import { useNavigate } from "react-router-dom";
+
+const SocialLogin = ({ setLoading }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const firebaseApp = initializeApp({
+    apiKey: import.meta.env.VITE_APP_API_KEY,
+    authDomain: `${import.meta.env.VITE_APP_PROJECT_ID}.firebaseapp.com`,
+    projectId: import.meta.env.VITE_APP_PROJECT_ID,
   });
+
+  // Initialize Firebase
+  const app = !getApps().length ? initializeApp(firebaseApp) : getApp();
+
+  // Initialize Firebase Authentication and get a reference to the service
+  const auth = getAuth(app);
+
+  const signInWithGoogle = async () => {
+    try {
+      await setPersistence(auth, browserLocalPersistence);
+
+      const provider = new GoogleAuthProvider();
+
+      provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
+      provider.setCustomParameters({
+        prompt: "select_account",
+        redirect_uri: "localhost:8000/auth/login",
+      });
+
+      const result = await signInWithPopup(auth, provider);
+      const body = {
+        access_token: result?.user?.accessToken,
+      };
+
+      // Call the custom verify api with the token
+      setLoading(true);
+      const res = await GoogleLogin(body);
+      setLoading(false);
+      if (res?.success) {
+        dispatch(getUser(res?.data?.user));
+        setToken(res?.data?.token);
+        setType("type", "student");
+        navigate("/user/index");
+      } else {
+        toast.error(
+          <Notification
+            title="Something went wrong"
+            description={res?.message}
+          />
+        );
+      }
+    } catch (error) {
+      console.log({ error });
+    }
+  };
   return (
     <div>
       <Box
@@ -31,7 +86,8 @@ const SocialLogin = () => {
       <Box className="w-full px-24">
         <Button
           variant="outlined"
-          onClick={() => login()}
+          // onClick={() => login()}
+          onClick={signInWithGoogle}
           startIcon={<img src="/icons/GoogleIcon.svg" alt="GoogleIcon" />}
           sx={{
             textTransform: "unset",

@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { baseUrl } from '../config';
-import { LOGGER, getUserToken, endSession } from './index';
-import { toast } from 'react-toastify';
+import axios from "axios";
+import { baseUrl } from "../config";
+import { LOGGER, getUserToken, endSession } from "./index";
+import { toast } from "react-toastify";
 
 const baseURL = baseUrl;
 
@@ -45,7 +45,7 @@ export default () => {
     axiosInstance.interceptors.response.use(
         (response) => {
             if (response.status === 204) {
-                return { status: 'success' };
+                return { status: "success" };
             }
             return response.data;
         },
@@ -63,21 +63,16 @@ export default () => {
                 LOGGER(`Endpoint not existent: `, err.response.config.baseURL);
                 return Promise.reject({
                     status: 404,
-                    message: 'Resource not found',
+                    message: "Resource not found",
                 });
             } else if (statusCode === 401 || statusCode === 403) {
-                // unauthorized request, go to login
-                toast.error(
-                    cnsole.log('error')
-                );
-                // configuredStore.store.dispatch({ type: SHOW_SESSION_ENDS_MODAL });
+                console.log({ err, statusCode });
                 setTimeout(() => {
                     // push the url to the login page
-                    window.location = '/auth/login';
+                    window.location = "/auth/login";
                     // end session
                     endSession();
                 }, 1000);
-                // return a promise (rejection)
                 return Promise.reject({ status: statusCode });
             } else {
                 // Something went wrong with the server

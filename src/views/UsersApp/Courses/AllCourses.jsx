@@ -22,11 +22,10 @@ const AllCourses = () => {
     { name: "Completed", id: 1 },
   ];
 
-  const { data, handleSearch, handleRemoveSearch, keyword } = useSearch(CoursesData, [
-    "name",
-    "title",
-    "status",
-  ]);
+  const { data, handleSearch, handleRemoveSearch, keyword } = useSearch(
+    CoursesData,
+    ["name", "title", "status"]
+  );
   return (
     <Box>
       <SimpleTab
@@ -36,6 +35,8 @@ const AllCourses = () => {
         handleChange={handleSearch}
         handleRemoveSearch={handleRemoveSearch}
         value={keyword}
+        search
+        sx={{ mx: 3 }}
       />
 
       <CustomTabPanel value={tab} index={0}>

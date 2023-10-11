@@ -42,7 +42,7 @@ const UserLogin = () => {
     setLoading(false);
     if (res?.success) {
       dispatch(getUser(res?.data));
-      navigate("/user/index");
+      navigate(`/auth/verify-email?user=${res?.data?.id}`);
     } else {
       toast.error(
         <Notification title="Something went wrong" description={res?.message} />
@@ -50,17 +50,21 @@ const UserLogin = () => {
     }
   };
   return (
-    <AuhComponent title="Create an account" type="signup">
+    <AuhComponent
+      title="Create an account"
+      type="signup"
+      setLoading={setLoading}
+    >
       <div className="w-full px-24 pt-10">
         <AppForm onSubmit={handleSubmit}>
           <Box sx={{ mb: 2 }}>
             <AppFormInput
               name="first_name"
               label="First Name"
-              placeholder="First Name"
-              variant="filled"
-              large
+              height="large"
               type="text"
+              variant="filled"
+              medium
               fullWidth
               value={first_name}
               onChange={(event) => setFirstName(event.target.value)}
@@ -70,10 +74,10 @@ const UserLogin = () => {
             <AppFormInput
               name="last_name"
               label="Last Name"
-              placeholder="Last Name"
-              variant="filled"
-              large
+              height="large"
               type="text"
+              variant="filled"
+              medium
               fullWidth
               value={last_name}
               onChange={(event) => setLastName(event.target.value)}
@@ -83,10 +87,10 @@ const UserLogin = () => {
             <AppFormInput
               name="email"
               label="Email"
-              placeholder="Email"
-              variant="filled"
-              large
+              height="large"
               type="email"
+              variant="filled"
+              medium
               fullWidth
               value={email}
               onChange={(event) => setEmail(event.target.value)}
@@ -96,10 +100,10 @@ const UserLogin = () => {
             <AppFormInput
               name="new_password"
               label="Password"
-              placeholder="Password"
-              variant="filled"
-              large
+              height="large"
               type="password"
+              variant="filled"
+              medium
               fullWidth
               value={new_password}
               onChange={(event) => setNewPassword(event.target.value)}
@@ -109,11 +113,11 @@ const UserLogin = () => {
             <AppFormInput
               name="confirm_password"
               label="Confirm Password"
-              placeholder="Confirm Password"
-              variant="filled"
-              large
+              height="large"
               type="password"
               fullWidth
+              variant="filled"
+              medium
               value={confirm_password}
               onChange={(event) => setConfirmPassword(event.target.value)}
             />

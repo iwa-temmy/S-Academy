@@ -37,13 +37,15 @@ const SidebarContent = (props) => {
             const isActive =
               (current?.parentKey || current?.key) === route?.key;
             return (
-              <SidebarListItem
-                active={isActive}
-                icon={<ListIcon Component={route.icon} />}
-                text={route.name}
-                link={route.path}
-                key={route.key}
-              />
+              route?.visible && (
+                <SidebarListItem
+                  active={isActive}
+                  icon={<ListIcon Component={route.icon} />}
+                  text={route.name}
+                  link={route.path}
+                  key={route.key}
+                />
+              )
             );
           })}
       </List>

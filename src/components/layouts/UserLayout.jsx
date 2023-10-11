@@ -34,13 +34,13 @@ const UserLayout = () => {
       navigate("/user/index");
     }
   }, [pathname]);
-  useEffect(() => {
-    if (auth) {
-      navigate("/user");
-    } else {
-      navigate("/");
-    }
-  }, [auth]);
+  // useEffect(() => {
+  //   if (auth) {
+  //     navigate("/user");
+  //   } else {
+  //     navigate("/");
+  //   }
+  // }, [auth]);
   return (
     <div className="flex">
       <Sidebar

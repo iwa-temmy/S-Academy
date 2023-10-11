@@ -66,10 +66,43 @@ export const ForgetPassword = async (credentials) => {
     return { success: false, message: err?.response?.data.message };
   }
 };
+export const ResetPassword = async (credentials, user_id, confirmation_token) => {
+  try {
+    const res = await axios.post(
+      `${baseUrl}/users/password_reset/?user_id=${user_id}&confirmation_token=${confirmation_token}`,
+      credentials
+    );
+    if (res?.data?.status?.toLowerCase() !== "success")
+      throw new Error(data?.message);
+    return {
+      success: true,
+      message: res?.data?.message,
+      data: res?.data?.data,
+    };
+  } catch (err) {
+    return { success: false, message: err?.response?.data.message };
+  }
+};
 
 export const VerifyLoggedInUser = async (credentials) => {
   try {
     const res = await axios.post(`${baseUrl}/users/verification/`, credentials);
+    if (res?.data?.status?.toLowerCase() !== "success")
+      throw new Error(data?.message);
+    return {
+      success: true,
+      message: res?.data?.message,
+      data: res?.data,
+    };
+  } catch (err) {
+    return { success: false, message: err?.response?.data.message };
+  }
+};
+
+
+export const ResendOtp = async (credentials) => {
+  try {
+    const res = await axios.post(`${baseUrl}/users/resend_emailotp/`, credentials);
     if (res?.data?.status?.toLowerCase() !== "success")
       throw new Error(data?.message);
     return {
@@ -94,6 +127,22 @@ export const Logout = async () => {
     };
   } catch (err) {
     return { success: false, message: err?.response?.data.message };
+  }
+};
+
+export const GoogleLogin = async (credentials) => {
+  try {
+    const res = await axios.post(`${baseUrl}/users/googlelogin/`, credentials);
+    if (res?.data?.status?.toLowerCase() !== "success")
+      throw new Error(data?.message);
+    return {
+      success: true,
+      message: res?.data?.message,
+      data: res?.data,
+    };
+  } catch (err) {
+    console.log({ err });
+    return { success: false, message: err?.response?.data?.message };
   }
 };
 

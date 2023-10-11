@@ -37,14 +37,15 @@ const UserLogin = () => {
       const res = await ForgetPassword(body);
       setLoading(false);
       if (res?.success) {
-        toast.success(
-          <Notification title="Success" description={res.message} />
-        );
+        navigate("/auth/reset-password");
+        // toast.success(
+        //   <Notification title="Success" description={res.message} />
+        // );
       } else {
         toast.error(
           <Notification
             title="Something went wrong"
-            description="We couldn't validate your credentials. Try again!"
+            description={res?.message}
           />
         );
       }
@@ -59,6 +60,8 @@ const UserLogin = () => {
             label="Email"
             height="large"
             type="email"
+            variant='filled'
+            medium
             fullWidth
             value={email}
             onChange={(event) => setEmail(event.target.value)}
