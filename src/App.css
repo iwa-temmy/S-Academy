@@ -11,6 +11,10 @@ body {
   background-position-x: left;
   background-position-y: center;
   /* background-position: 50px 150px; */
+
+  @media only screen and (max-width: 1024px) {
+    background-image: none;
+  }
 }
 /* ReactQuill text editor styles */
 .ql-toolbar.ql-snow {

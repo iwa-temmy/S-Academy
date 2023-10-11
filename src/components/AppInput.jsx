@@ -183,7 +183,6 @@ const AppInput = ({
             disabled={disabled}
             multiline={multiline}
             fullWidth
-            placeholder=" "
             endAdornment={
               type === "password" && value ? (
                 <InputAdornment position="end">
@@ -214,7 +213,7 @@ const AppInput = ({
               marginBottom: 1,
               textTransform: "capitalize !important",
               overflow: "hidden",
-              fontSize: "14px",
+              fontSize: 14,
               // paddingTop: variant === 'standard' ? '1rem' : null,
               "&.Mui-disabled": { borderColor: theme.palette.gray[100] },
               "& fieldset": { border: "0 !important" },
