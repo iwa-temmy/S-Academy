@@ -4,8 +4,13 @@ import { Course } from "@carbon/icons-react";
 import AdminDashboard from "../views/admin/Dashboard";
 import Courses from "../views/admin/Courses";
 import Tutors from "../views/admin/Tutors";
+import UserLogin from "../views/auth/Login";
 
 export const adminRoutes = [
+  {
+    path: "/admin/login",
+    element: <UserLogin />,
+  },
   {
     path: "/admin/index",
     key: "index",

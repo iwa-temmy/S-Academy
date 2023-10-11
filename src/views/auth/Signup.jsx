@@ -30,27 +30,24 @@ const UserLogin = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-      setLoading(true);
-      const body = {
-        email,
-        password: new_password,
-        first_name,
-        last_name,
-        user_type: "student",
-      };
-      const res = await RegisterUser(body);
-      setLoading(false);
-      if (res?.success) {
-        dispatch(getUser(res?.data));
-        navigate("/user/index");
-      } else {
-        toast.error(
-          <Notification
-            title="Something went wrong"
-            description={res?.message}
-          />
-        );
-      }
+    setLoading(true);
+    const body = {
+      email,
+      password: new_password,
+      first_name,
+      last_name,
+      user_type: "student",
+    };
+    const res = await RegisterUser(body);
+    setLoading(false);
+    if (res?.success) {
+      dispatch(getUser(res?.data));
+      navigate("/user/index");
+    } else {
+      toast.error(
+        <Notification title="Something went wrong" description={res?.message} />
+      );
+    }
   };
   return (
     <AuhComponent title="Create an account" type="signup">
@@ -60,7 +57,9 @@ const UserLogin = () => {
             <AppFormInput
               name="first_name"
               label="First Name"
-              height="large"
+              placeholder="First Name"
+              variant="filled"
+              large
               type="text"
               fullWidth
               value={first_name}
@@ -71,7 +70,9 @@ const UserLogin = () => {
             <AppFormInput
               name="last_name"
               label="Last Name"
-              height="large"
+              placeholder="Last Name"
+              variant="filled"
+              large
               type="text"
               fullWidth
               value={last_name}
@@ -82,7 +83,9 @@ const UserLogin = () => {
             <AppFormInput
               name="email"
               label="Email"
-              height="large"
+              placeholder="Email"
+              variant="filled"
+              large
               type="email"
               fullWidth
               value={email}
@@ -93,7 +96,9 @@ const UserLogin = () => {
             <AppFormInput
               name="new_password"
               label="Password"
-              height="large"
+              placeholder="Password"
+              variant="filled"
+              large
               type="password"
               fullWidth
               value={new_password}
@@ -104,7 +109,9 @@ const UserLogin = () => {
             <AppFormInput
               name="confirm_password"
               label="Confirm Password"
-              height="large"
+              placeholder="Confirm Password"
+              variant="filled"
+              large
               type="password"
               fullWidth
               value={confirm_password}

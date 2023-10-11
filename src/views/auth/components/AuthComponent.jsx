@@ -1,4 +1,3 @@
-import React from "react";
 import AuthFooter from "./AuthUserFooter";
 import Authheader from "./Authheader";
 import { Typography } from "@mui/material";

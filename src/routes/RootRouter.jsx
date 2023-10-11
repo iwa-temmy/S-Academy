@@ -10,7 +10,7 @@ import { getType, getUserToken } from "../utils";
 const auth = getUserToken();
 const type = getType("type");
 
-export default createBrowserRouter([
+const AllRoutes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
@@ -37,3 +37,5 @@ export default createBrowserRouter([
     ],
   },
 ]);
+
+export default AllRoutes;

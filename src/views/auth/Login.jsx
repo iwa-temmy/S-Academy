@@ -31,36 +31,38 @@ const UserLogin = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-      setLoading(true);
-      const body = {
-        email,
-        password,
-      };
-      const res = await LoginUser(body);
-      setLoading(false);
-      if (res?.success) {
-        dispatch(getUser(res?.data?.user));
-        setToken(res?.data?.token);
-        setType("type", res?.data?.user?.user_type);
-        navigate("/user/index");
-      } else {
-        toast.error(
-          <Notification
-            title="Something went wrong"
-            description="We couldn't validate your credentials. Try again!"
-          />
-        );
-      }
+    setLoading(true);
+    const body = {
+      email,
+      password,
+    };
+    const res = await LoginUser(body);
+    setLoading(false);
+    if (res?.success) {
+      dispatch(getUser(res?.data?.user));
+      setToken(res?.data?.token);
+      setType("type", res?.data?.user?.user_type);
+      navigate("/user/index");
+    } else {
+      toast.error(
+        <Notification
+          title="Something went wrong"
+          description="We couldn't validate your credentials. Try again!"
+        />
+      );
+    }
   };
 
   return (
     <AuhComponent title="Sign In" type="login">
-      <div className="w-full px-24 pt-10">
+      <div className="w-full sm:px-4 md:px-10  lg:px-24 pt-10">
         <AppForm onSubmit={handleSubmit}>
           <AppFormInput
             name="email"
             label="Email"
-            height="large"
+            variant="filled"
+            placeholder="Email"
+            large
             type="email"
             fullWidth
             value={email}
@@ -82,7 +84,9 @@ const UserLogin = () => {
           <AppFormInput
             name="password"
             label="Password"
-            height="large"
+            variant="filled"
+            large
+            placeholder="Password"
             type="password"
             fullWidth
             value={password}
@@ -116,7 +120,7 @@ const UserLogin = () => {
                 fontSize: "12px",
                 color: theme.palette.primary[40],
               }}
-              to="/user/signup"
+              to="/auth/signup"
             >
               Sign up
             </Typography>
