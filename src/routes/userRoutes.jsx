@@ -48,6 +48,8 @@ export const userRoutes = [
     key: "settings",
     name: "Settings",
     icon: GridView,
+    component: Settings,
+    element: <Settings />,
     breadcrumb: true,
     exact: false,
   },
