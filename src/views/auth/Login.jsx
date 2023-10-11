@@ -42,7 +42,11 @@ const UserLogin = () => {
       dispatch(getUser(res?.data?.user));
       setToken(res?.data?.token);
       setType("type", res?.data?.user?.user_type);
-      navigate("/user/index");
+      if (res?.data?.verified) {
+        navigate("/user/index");
+      } else {
+        navigate(`/auth/verify-email?user=${res?.data?.user?.id}`);
+      }
     } else {
       toast.error(
         <Notification
@@ -54,7 +58,7 @@ const UserLogin = () => {
   };
 
   return (
-    <AuhComponent title="Sign In" type="login">
+    <AuhComponent title="Sign In" type="login" setLoading={setLoading}>
       <div className="w-full sm:px-4 md:px-10  lg:px-24 pt-10">
         <AppForm onSubmit={handleSubmit}>
           <AppFormInput
@@ -64,6 +68,7 @@ const UserLogin = () => {
             placeholder="Email"
             large
             type="email"
+            medium
             fullWidth
             value={email}
             onChange={(event) => setEmail(event.target.value)}
@@ -77,7 +82,7 @@ const UserLogin = () => {
               fontSize: "12px",
               pt: 1.5,
             }}
-            to="/user/forget-password"
+            to="/auth/forget-password"
           >
             Forgot password
           </Typography>
@@ -88,6 +93,7 @@ const UserLogin = () => {
             large
             placeholder="Password"
             type="password"
+            medium
             fullWidth
             value={password}
             onChange={(event) => setPassword(event.target.value)}

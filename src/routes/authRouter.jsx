@@ -1,4 +1,3 @@
-import AdminResetPassword from "../views/auth/AdminResetPassword.jsx";
 import UserResetPassword from "../views/auth/ResetPassword";
 import UserLogin from "../views/auth/Login";
 import UserSignup from "../views/auth/Signup";
@@ -21,10 +20,6 @@ const AuthRouter = [
   {
     path: "/auth/verify-email",
     element: <VerifyUser />,
-  },
-  {
-    path: "/auth/reset-password",
-    element: <AdminResetPassword />,
   },
   {
     path: "/auth/reset-password",

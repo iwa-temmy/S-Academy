@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { useTheme } from "@mui/styles";
 import SocialLogin from "../../../components/SocialLogin";
 
-const AuthFooter = () => {
+const AuthFooter = ({ setLoading }) => {
   const theme = useTheme();
   return (
     <div className="w-full">
-      <SocialLogin />
+      <SocialLogin setLoading={setLoading} />
       <div className="flex flex-row justify-between mt-10">
         <Typography
           component={Link}

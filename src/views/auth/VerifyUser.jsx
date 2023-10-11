@@ -12,14 +12,21 @@ import Notification from "../../components/Notification";
 import AppOptInput from "../../components/AppOptInput";
 
 // Redux
-import { VerifyLoggedInUser } from "../../redux/userSlice";
+import { VerifyLoggedInUser, ResendOtp, getUser } from "../../redux/userSlice";
 
 // Utils
 import { parseQuery } from "../../utils";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Stack, Typography } from "@mui/material";
+import { useTheme } from "@mui/styles";
+
+// Utils
+import { setToken, setType } from "../../utils";
 
 const VerifyUser = () => {
+  const theme = useTheme();
   const location = useLocation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.users);
   const queryParams = useMemo(
@@ -30,25 +37,48 @@ const VerifyUser = () => {
   // State
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [loading, setLoading] = useState(false);
+  const [loading_, setLoading_] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     const payload = {
-      otp,
+      otp: otp?.join(""),
       user: queryParams?.user,
-      tag: user_info?.is_active === false ? "login" : "register",
+      tag: "register",
     };
     const res = await VerifyLoggedInUser(payload);
     setLoading(false);
     if (res?.success) {
+      console.log({ res });
+      dispatch(getUser(res?.data?.user));
+      setToken(res?.data?.token);
+      setType("type", res?.data?.user?.user_type);
+      setTimeout(() => {
+        navigate("/user/index");
+      }, 2000);
+    } else {
+      toast.error(
+        <Notification title="Something went wrong" description={res?.message} />
+      );
+    }
+  };
+
+  const handleResendOtp = async (e) => {
+    e.preventDefault();
+    setLoading_(true);
+    const body = {
+      user: queryParams?.user,
+    };
+    const res = await ResendOtp(body);
+    setTimeout(() => setLoading(false), 2000);
+    if (res?.success) {
+      setLoading_(false);
       toast.success(
         <Notification title="Success" description={res?.message} />
       );
-      setTimeout(() => {
-        navigate("/auth/login");
-      }, 2000);
     } else {
+      setLoading_(false);
       toast.error(
         <Notification title="Something went wrong" description={res?.message} />
       );
@@ -83,6 +113,38 @@ const VerifyUser = () => {
           />
         </AppForm>
       </div>
+
+      <Stack
+        direction="row"
+        justifyContent="left"
+        alignItems="center"
+        sx={{ marginTop: 4 }}
+      >
+        <Typography
+          sx={{
+            color: theme.palette.primary[20],
+            fontSize: "14px",
+            fontWeight: 500,
+          }}
+        >
+          Didn’t get the code?
+        </Typography>
+        <AppLoadingButton
+          text="Resend Code"
+          type="submit"
+          color="primary"
+          loading={loading_}
+          loadingPosition="center"
+          variant={"outlined"}
+          onClick={handleResendOtp}
+          sx={{
+            textTransform: "capitalize",
+            marginLeft: 1,
+            padding: "0.3rem 0.5rem",
+            borderRadius: "10px",
+          }}
+        />
+      </Stack>
     </AuhComponent>
   );
 };
