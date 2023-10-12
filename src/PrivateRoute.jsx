@@ -1,11 +1,10 @@
-import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { getUserToken, getType } from "./utils";
 import UserLayout from "./components/layouts/UserLayout";
-import AdminLayout from "./views/admin/Dashboard";
+import AdminLayout from "./components/layouts/AdminLayout";
 
 const PrivateRoute = () => {
-   const location = useLocation();
+  const location = useLocation();
   const auth = getUserToken();
   const type = getType("type");
   console.log({ auth, type });
