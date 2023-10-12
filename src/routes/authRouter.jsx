@@ -14,7 +14,7 @@ const AuthRouter = [
     element: <UserSignup />,
   },
   {
-    path: "/auth/forget-password",
+    path: "/auth/forgot-password",
     element: <UserForgetPassword />,
   },
   {

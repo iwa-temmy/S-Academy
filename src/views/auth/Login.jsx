@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 // Imports
 import { Typography } from "@mui/material";
 import { useTheme } from "@mui/styles";
@@ -18,6 +16,8 @@ import { LoginUser, getUser } from "../../redux/userSlice";
 
 // Utils
 import { setToken, setType } from "../../utils";
+import useValidation from "../../hooks/useFormValidation";
+import { LOGIN_VALIDATIONS } from "./util";
 
 const UserLogin = () => {
   const theme = useTheme();
@@ -25,24 +25,16 @@ const UserLogin = () => {
   const navigate = useNavigate();
 
   // State
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    const body = {
-      email,
-      password,
-    };
-    const res = await LoginUser(body);
-    setLoading(false);
+  const submitForm = async (data) => {
+    const res = await LoginUser(data);
     if (res?.success) {
-      dispatch(getUser(res?.data?.user));
-      setToken(res?.data?.token);
-      setType("type", res?.data?.user?.user_type);
-      if (res?.data?.verified) {
+      const { user, token, verified } = res?.data || {};
+      dispatch(getUser(user));
+      setToken(token);
+      setType("type", user?.user_type);
+      if(user?.user_type === "admin") {
+        navigate("/admin/index");
+      }else if (verified) {
         navigate("/user/index");
       } else {
         navigate(`/auth/verify-email?user=${res?.data?.user?.id}`);
@@ -56,22 +48,32 @@ const UserLogin = () => {
       );
     }
   };
-
+  const {
+    data,
+    loading,
+    setFieldValue,
+    showError,
+    handleFormSubmit,
+    // resetForm,
+  } = useValidation(LOGIN_VALIDATIONS, submitForm);
+  const handleTextChange = (e) => {
+    const { name, value } = e.target;
+    setFieldValue(name, value);
+  };
   return (
-    <AuhComponent title="Sign In" type="login" setLoading={setLoading}>
+    <AuhComponent title="Sign In" type="login">
       <div className="w-full sm:px-4 md:px-10  lg:px-24 pt-10">
-        <AppForm onSubmit={handleSubmit}>
+        <AppForm onSubmit={handleFormSubmit}>
           <AppFormInput
             name="email"
             label="Email"
             variant="filled"
-            placeholder="Email"
-            large
             type="email"
-            medium
+            large
             fullWidth
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            value={data?.email}
+            error={showError("email")}
+            onChange={handleTextChange}
           />
           <Typography
             component={Link}
@@ -91,12 +93,11 @@ const UserLogin = () => {
             label="Password"
             variant="filled"
             large
-            placeholder="Password"
             type="password"
-            medium
             fullWidth
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            value={data?.password}
+            error={showError("password")}
+            onChange={handleTextChange}
           />
           <AppLoadingButton
             text="Sign in"

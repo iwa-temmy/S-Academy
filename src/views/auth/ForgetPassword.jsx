@@ -1,9 +1,6 @@
-import { useState } from "react";
-
 // Imports
-import { useTheme } from "@mui/styles";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 // Components
 import { AppForm, AppFormInput } from "../../components/forms";
@@ -14,57 +11,61 @@ import Notification from "../../components/Notification";
 
 // Redux
 import { ForgetPassword } from "../../redux/userSlice";
+import useValidation from "../../hooks/useFormValidation";
+import { RESET_PASSWORD_VALIDATIONS } from "./util";
 
 // Utils
-import { forget_password_validation } from "./utils/validation";
 
 const UserLogin = () => {
-  const theme = useTheme();
-  const dispatch = useDispatch();
+  // const theme = useTheme();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // State
-  const [email, setEmail] = useState("");
-  const [errors, setErrors] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-      setLoading(true);
-      const body = {
-        email,
-      };
-      const res = await ForgetPassword(body);
-      setLoading(false);
-      if (res?.success) {
-        navigate("/auth/reset-password");
-        // toast.success(
-        //   <Notification title="Success" description={res.message} />
-        // );
-      } else {
-        toast.error(
-          <Notification
-            title="Something went wrong"
-            description={res?.message}
-          />
-        );
-      }
+  const submitForm = async (data) => {
+    const res = await ForgetPassword(data);
+    if (res?.success) {
+      navigate("/auth/reset-password");
+      // toast.success(
+      //   <Notification title="Success" description={res.message} />
+      // );
+    } else {
+      toast.error(
+        <Notification title="Something went wrong" description={res?.message} />
+      );
+    }
   };
 
+  const {
+    data,
+    loading,
+    setFieldValue,
+    showError,
+    handleFormSubmit,
+    // resetForm,
+  } = useValidation(RESET_PASSWORD_VALIDATIONS, submitForm);
+  const handleTextChange = (e) => {
+    const { name, value } = e.target;
+    setFieldValue(name, value);
+  };
+
+  console.log(showError("email"));
+
   return (
-    <AuhComponent title="Forget Password" type='forget_password'>
+    <AuhComponent title="Forget Password" type="forget_password">
       <div className="w-full px-24 pt-10">
-        <AppForm onSubmit={handleSubmit}>
+        <AppForm onSubmit={handleFormSubmit}>
           <AppFormInput
             name="email"
             label="Email"
-            height="large"
             type="email"
-            variant='filled'
+            variant="filled"
             medium
             fullWidth
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            value={data?.email}
+            onChange={handleTextChange}
+            error={showError("email")}
           />
           <AppLoadingButton
             text="Sign in"
