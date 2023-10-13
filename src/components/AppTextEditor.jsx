@@ -1,9 +1,8 @@
-import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const AppTextEditor = () => {
-  const [value, setValue] = useState("");
+const AppTextEditor = (props) => {
+  const { label, value, onChange, placeholder } = props;
 
   const toolbarOptions = [
     [
@@ -30,15 +29,20 @@ const AppTextEditor = () => {
       matchVisual: false,
     },
   };
-
+  console.log(value);
   return (
-    <ReactQuill
-      theme="snow"
-      value={value}
-      modules={modules}
-      onChange={setValue}
-      placeholder={"tell us about yourself"}
-    />
+    <>
+      <label className="text-xs text-[#77777A] font-medium pb-4 pl-1">
+        {label}
+      </label>
+      <ReactQuill
+        theme="snow"
+        value={value}
+        modules={modules}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
+    </>
   );
 };
 

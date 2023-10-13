@@ -86,7 +86,12 @@ const AppInput = ({
             disabled={disabled}
             label={
               <Typography
-                sx={{ color: "#8F9099", transition: "0.2s ease out" }}
+                sx={{
+                  color: "#8F9099",
+                  transition: "0.2s ease out",
+                  fontSize: 14,
+                  fontWeight: 400,
+                }}
               >
                 {label}
               </Typography>
@@ -127,10 +132,10 @@ const AppInput = ({
               marginBottom: 1,
               borderRadius: "5px",
               color: "#8F9099",
-              fontWeight: 500,
+              fontWeight: 400,
               textTransform: "capitalize !important",
               overflow: "hidden",
-              fontSize: "14px",
+              fontSize: 14,
               // paddingTop: variant === 'standard' ? '1rem' : null,
               "&.Mui-disabled": {
                 borderColor: theme.palette.gray[100],
@@ -210,7 +215,7 @@ const AppInput = ({
               height: multiline ? "unset" : height ? height : 40,
               border: `1px solid ${theme.palette.gray[90]}`,
               color: theme.palette.gray[900],
-              fontWeight: 500,
+              fontWeight: 400,
               marginBottom: 1,
               textTransform: "capitalize !important",
               overflow: "hidden",

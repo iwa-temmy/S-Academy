@@ -19,12 +19,23 @@ body {
 /* ReactQuill text editor styles */
 .ql-toolbar.ql-snow {
   background-color: #f1f5f9;
+  border: 1px solid #e2e8f0 !important;
+  border-bottom: none !important;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
+  margin-top: 4px;
 }
 .ql-picker-label::before {
   color: #64748b;
   font-weight: 400;
+}
+.ql-container.ql-snow {
+  min-height: 80px;
+  color: #5e5e62;
+  border: 1px solid #e2e8f0 !important;
+  border-top: none !important;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 .ql-toolbar.ql-snow .ql-stroke {
   stroke: #64748b;
@@ -45,4 +56,12 @@ body {
 :where(.css-dev-only-do-not-override-1vr7spz).ant-upload-wrapper
   .ant-upload-drag {
   background-color: transparent !important;
+}
+
+:where(.css-dev-only-do-not-override-1vr7spz).ant-upload-wrapper
+  .ant-upload-drag
+  .ant-upload {
+  padding: 0 !important;
+  padding-top: 4px !important;
+  padding-bottom: 16px !important;
 }

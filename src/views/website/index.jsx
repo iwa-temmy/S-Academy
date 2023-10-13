@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AppCheckbox from "../../components/AppCheckbox";
 import AppInput from "../../components/AppInput";
-import AppSelect from "../../components/AppSelect";
+import AppSelect from "../../components/AppOldSelect";
 import AppTag from "../../components/AppTag";
 import { Box } from "@mui/material";
 import { useTheme } from "@mui/styles";
 import AppTable from "../../components/app-table";
 import AppTextEditor from "../../components/AppTextEditor";
 import AppModal from "../../components/AppModal";
-import LandingPage from './LandingPage';
+import AppNewSelect from "../../components/AppSelect";
+// import LandingPage from "./LandingPage";
 
 const Index = () => {
   const theme = useTheme();
   const [modalOpen, setModalOpen] = useState(false);
+  const [value, setValue] = useState("");
+
+  const onChange = (text) => {
+    setValue(text);
+  };
   const columns = [
     {
       title: "Owner",
@@ -106,7 +112,7 @@ const Index = () => {
   ];
   return (
     <div className="flex flex-col justify-center items-center my-10">
-        {/* <LandingPage /> */}
+      {/* <LandingPage /> */}
       <AppInput
         name="email"
         placeholder="Email"
@@ -116,14 +122,16 @@ const Index = () => {
       />
       <AppTag text="draft" />
       <AppCheckbox label="Agree to terms and condition" />
-      <AppSelect
+      <AppNewSelect
         label="Course Tutor"
         defaultValue="Select your Course Tutor"
         options={[
           { name: "Ebenezer don", value: "Ebenezer don" },
           { name: "Mosh Hamedami", value: "Mosh Hamedami" },
         ]}
-        extraLarge
+        fullWidth={true}
+        sx={{ width: "100% !important" }}
+        medium
       />
 
       <AppTable
@@ -139,7 +147,11 @@ const Index = () => {
         // onSearch={handleSearch}
       />
 
-      <AppTextEditor />
+      <AppTextEditor
+        value={value}
+        onChange={onChange}
+        placeholder="tell us about yourself"
+      />
       <button onClick={() => setModalOpen(true)}>Open Modal</button>
       <AppModal
         open={modalOpen}
