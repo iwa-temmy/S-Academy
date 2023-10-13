@@ -2,6 +2,10 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    colors: {
+      danger: "#FF5449",
+      default: "#5C5E67",
+    },
     extend: {
       screens: {
         // small mobile phone

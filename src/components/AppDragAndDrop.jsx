@@ -1,6 +1,6 @@
 import { Box, useTheme } from "@mui/material";
 import { Upload } from "antd";
-import { accept } from "../utils/utils";
+import { accept } from "../utils";
 import { useMemo } from "react";
 
 const { Dragger } = Upload;

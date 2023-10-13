@@ -7,7 +7,6 @@ import App from "../App";
 import PrivateRoute from "../PrivateRoute.jsx";
 import CourseView from "../views/UsersApp/Courses/components/CourseView";
 
-
 import { getType, getUserToken } from "../utils";
 
 const auth = getUserToken();
@@ -35,8 +34,7 @@ const AllRoutes = createBrowserRouter([
       {
         path: "/user",
         element: <PrivateRoute />,
-        children: 
-        [
+        children: [
           ...userRoutes,
           {
             path: "/user/courses/:id",

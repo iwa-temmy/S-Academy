@@ -5,7 +5,7 @@ import { transactionHistory } from "../util";
 import {
   currencySymbol,
   formatDateObjectHandler,
-} from "../../../../utils/utils";
+} from "../../../../utils";
 const TransactionHistory = () => {
   return (
     <Box sx={{ mt: 3 }}>
