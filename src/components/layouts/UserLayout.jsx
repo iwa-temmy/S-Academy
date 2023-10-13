@@ -4,12 +4,11 @@ import Sidebar from "./sidebar";
 import { userRoutes } from "../../routes/userRoutes";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
-import { getUserToken } from "../../utils";
+// import { getUserToken } from "../../utils";
 
 const UserLayout = () => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [currentRoute, setCurrentRoute] = useState(null);
-  const auth = getUserToken();
 
   const { pathname } = useLocation();
   const location = useLocation();
@@ -33,14 +32,7 @@ const UserLayout = () => {
     if (pathname === "/user") {
       navigate("/user/index");
     }
-  }, [pathname]);
-  // useEffect(() => {
-  //   if (auth) {
-  //     navigate("/user");
-  //   } else {
-  //     navigate("/");
-  //   }
-  // }, [auth]);
+  }, [navigate, pathname]);
   return (
     <div className="flex">
       <Sidebar

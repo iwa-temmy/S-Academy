@@ -10,7 +10,7 @@ import AppFilterSelect from "../../../components/app-table/AppFilterSelect";
 import { AddCircleOutline } from "@mui/icons-material";
 //hooks
 import useSearch from "../../../hooks/useSearch";
-import { formatAmount } from "../../../utils/utils";
+import { formatAmount } from "../../../utils";
 import ViewDetailsDrawer from "./ViewDetailsDrawer";
 import AppButton from "../../../components/AppButton";
 import CreateTutorDrawer from "./CreateTutorDrawer";

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { baseUrl } from "../config";
 import { LOGGER, getUserToken, endSession } from "./index";
-import { toast } from "react-toastify";
 
 const baseURL = baseUrl;
 

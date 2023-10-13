@@ -32,8 +32,8 @@ const AppDrawer = (props) => {
           justifyContent="space-between"
           alignItems="center"
           sx={{
-            p: "15px",
-            pl: "21px",
+            px: 3,
+            py: 2,
             boxShadow: "0px 2px 16px 0px rgba(0, 0, 0, 0.08)",
           }}
         >
@@ -47,7 +47,7 @@ const AppDrawer = (props) => {
                 fontWeight: 600,
                 fontSize: 15,
                 color: theme.palette.neutral[40],
-                pl: "30px",
+                pl: 2,
               }}
             >
               {title}

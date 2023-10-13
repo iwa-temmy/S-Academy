@@ -32,9 +32,9 @@ const UserLogin = () => {
       dispatch(getUser(user));
       setToken(token);
       setType("type", user?.user_type);
-      if(user?.user_type === "admin") {
+      if (user?.user_type === "admin") {
         navigate("/admin/index");
-      }else if (verified) {
+      } else if (verified) {
         navigate("/user/index");
       } else {
         navigate(`/auth/verify-email?user=${res?.data?.user?.id}`);

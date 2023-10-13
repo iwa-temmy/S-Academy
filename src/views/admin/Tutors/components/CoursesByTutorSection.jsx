@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack, Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/styles";
-import { currencySymbol, formatAmount } from "../../../../utils/utils";
+import { currencySymbol, formatAmount } from "../../../../utils";
 import { courseByTutor } from "../util";
 const CoursesByTutorSection = () => {
   return (
