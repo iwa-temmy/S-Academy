@@ -24,7 +24,7 @@ const UserLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // State
+  // form
   const submitForm = async (data) => {
     const res = await LoginUser(data);
     if (res?.success) {

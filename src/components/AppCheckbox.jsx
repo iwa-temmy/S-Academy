@@ -11,6 +11,7 @@ const AppCheckbox = (props) => {
           onChange={onChange}
           sx={{
             color: "#011947",
+            pl: 0,
             "& .MuiSvgIcon-root": { fontSize: 16 },
             "&.Mui-checked": {
               color: "#011947",

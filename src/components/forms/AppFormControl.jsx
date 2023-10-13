@@ -1,21 +1,26 @@
-import React from 'react';
 // import { useTheme } from '@mui/material/styles';
 import {
-    // Box,
-    FormControl,
-} from '@mui/material';
+  // Box,
+  FormControl,
+} from "@mui/material";
 
 const AppFormControl = (props) => {
-    // const theme = useTheme();
-    const {
-        children,
-        //  label, name, error, disabled, labelStyle,
-        sx = {},
-        fullWidth,
-    } = props;
-    return (
-        <FormControl fullWidth={fullWidth} sx={{ width: fullWidth ? 'fit-content' : '100%', ...sx }}>
-            {/* {label && (
+  // const theme = useTheme();
+  const {
+    children,
+    //  label, name, error, disabled, labelStyle,
+    sx = {},
+    fullWidth,
+    variant,
+  } = props;
+  console.log({ fullWidth });
+  return (
+    <FormControl
+      variant={variant}
+      fullWidth={fullWidth}
+      sx={{ width: fullWidth ? "100%" : "fit-content", ...sx }}
+    >
+      {/* {label && (
                 <Box
                     component="label"
                     htmlFor={name}
@@ -33,9 +38,9 @@ const AppFormControl = (props) => {
                     {label}
                 </Box>
             )} */}
-            {children}
-        </FormControl>
-    );
+      {children}
+    </FormControl>
+  );
 };
 
 export default AppFormControl;

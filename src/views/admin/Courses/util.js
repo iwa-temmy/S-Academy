@@ -5,6 +5,16 @@ export const LEVEL_OPTIONS = [
   { name: "Professional", value: "professional" },
 ];
 
+export const ADD_COURSE_STEP_ONE_VALIDATIONS = {
+  name: {
+    name: "Name",
+    required: true,
+  },
+  description: {
+    name: "Description",
+    required: true,
+  },
+};
 export const COURSES_DATA = [
   {
     id: 1,
