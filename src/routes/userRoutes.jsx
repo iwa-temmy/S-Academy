@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 import { GridView } from "@mui/icons-material";
 import { Course } from "@carbon/icons-react";
 import Dashboard from "../views/UsersApp/Dashboard/index";
@@ -61,8 +61,6 @@ export const userRoutes = [
     name: "Settings",
     visible: true,
     icon: GridView,
-    component: Settings,
-    element: <Settings />,
     breadcrumb: true,
     exact: false,
     element: <Settings />,

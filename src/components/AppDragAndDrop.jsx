@@ -1,11 +1,18 @@
-import { Box, useTheme, Typography } from "@mui/material";
+import { Box, useTheme, Typography, FormHelperText } from "@mui/material";
 import { Upload } from "antd";
 import { accept } from "../utils";
 import { useMemo } from "react";
 
 const { Dragger } = Upload;
 const AppDragAndDrop = (props) => {
-  const { label, icon, sx = {}, draggerProps = {}, accepts = [] } = props;
+  const {
+    label,
+    icon,
+    sx = {},
+    error,
+    draggerProps = {},
+    accepts = [],
+  } = props;
   const theme = useTheme();
 
   const acceptedFormat = useMemo(() => {
@@ -23,7 +30,7 @@ const AppDragAndDrop = (props) => {
   };
 
   return (
-    <>
+    <div className="pb-[16px]">
       <label className="text-xs text-[#77777A] font-medium">{label}</label>
       <Box
         component={Dragger}
@@ -33,6 +40,7 @@ const AppDragAndDrop = (props) => {
           },
           "& .ant-upload": {
             border: "none",
+            paddingBottom: "4px !important",
           },
           "& .ant-upload-list": {
             display: "none",
@@ -46,7 +54,9 @@ const AppDragAndDrop = (props) => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            border: `1px solid ${theme.palette.neutral[80]}8f`,
+            border: `1px solid ${
+              error ? theme.palette.error[50] : theme.palette.neutral[80] + "8f"
+            }`,
             backgroundColor: "transparent",
             borderRadius: 2,
             py: 2,
@@ -76,7 +86,12 @@ const AppDragAndDrop = (props) => {
           </Typography>
         </Box>
       </Box>
-    </>
+      {error && (
+        <FormHelperText sx={{ m: 0 }} error>
+          {error}
+        </FormHelperText>
+      )}
+    </div>
   );
 };
 

@@ -128,8 +128,9 @@ const AppInput = ({
             {...restProps}
             sx={{
               height: multiline ? "unset" : height ? height : 40,
-              border: `1px solid ${theme.palette.gray[90]}`,
-              marginBottom: 1,
+              border: `1px solid ${
+                error ? theme.palette.error[50] : theme.palette.gray[90]
+              }`,
               borderRadius: "5px",
               color: "#8F9099",
               fontWeight: 400,

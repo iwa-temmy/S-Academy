@@ -9,7 +9,7 @@ import AppTable from "../../components/app-table";
 import AppTextEditor from "../../components/AppTextEditor";
 import AppModal from "../../components/AppModal";
 import AppNewSelect from "../../components/AppSelect";
-// import LandingPage from "./LandingPage";
+import Accordion from "../../components/accordion/Accordion";
 
 const Index = () => {
   const theme = useTheme();
@@ -152,6 +152,7 @@ const Index = () => {
         onChange={onChange}
         placeholder="tell us about yourself"
       />
+      <Accordion />
       <button onClick={() => setModalOpen(true)}>Open Modal</button>
       <AppModal
         open={modalOpen}

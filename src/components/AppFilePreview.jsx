@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { Box, IconButton, Typography, Stack, useTheme } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
 

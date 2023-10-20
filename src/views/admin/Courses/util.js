@@ -1,5 +1,5 @@
 export const LEVEL_OPTIONS = [
-  { name: "All", value: "" },
+  { name: "All", value: "all" },
   { name: "Beginner", value: "beginner" },
   { name: "Intermediate", value: "intermediate" },
   { name: "Professional", value: "professional" },
@@ -10,8 +10,32 @@ export const ADD_COURSE_STEP_ONE_VALIDATIONS = {
     name: "Name",
     required: true,
   },
+  image: {
+    name: "Course Image",
+    required: true,
+  },
   description: {
     name: "Description",
+    required: true,
+  },
+  category: {
+    name: "Course Category",
+    required: true,
+  },
+  tutor: {
+    name: "Course Tutor",
+    required: true,
+  },
+  level: {
+    name: "Course level",
+    required: true,
+  },
+  price: {
+    name: "Price",
+    required: true,
+  },
+  things_to_learn: {
+    name: "Things that will be learnt",
     required: true,
   },
 };

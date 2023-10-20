@@ -7,6 +7,7 @@ import {
   TextField,
   Button,
   InputAdornment,
+  FormHelperText,
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 import AppFormControl from "./AppFormControl";
@@ -77,7 +78,7 @@ const AppSelect = ({
       <AppFormControl
         name={name}
         label={label}
-        error={error}
+        error={Boolean(error)}
         disabled={disabled}
         labelStyle={labelStyle}
         fullWidth={fullWidth}
@@ -97,10 +98,12 @@ const AppSelect = ({
           sx={{
             height: height ? height : 40,
             fontSize: 14,
-            border: "0.5px solid",
-            borderColor: error
-              ? theme.palette.error[700]
-              : theme.palette.gray[90],
+            border: `0.5px solid ${
+              error ? theme.palette.error[50] : theme.palette.gray[90]
+            }`,
+            // borderColor: error
+            //   ? theme.palette.error[700]
+            //   : theme.palette.gray[90],
             color: (multiple ? value.length : value)
               ? theme.palette.neutral[60]
               : theme.palette.neutral[60],
@@ -258,6 +261,11 @@ const AppSelect = ({
             </MenuItem>
           )}
         </Select>
+        {error && (
+          <FormHelperText sx={{ m: 0 }} error>
+            {error}
+          </FormHelperText>
+        )}
       </AppFormControl>
     </>
   );

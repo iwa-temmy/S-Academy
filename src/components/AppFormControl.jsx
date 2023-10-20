@@ -8,12 +8,14 @@ const AppFormControl = (props) => {
   const {
     children,
     //  label, name, error, disabled, labelStyle,
+    error,
     sx = {},
     fullWidth,
   } = props;
   return (
     <FormControl
       fullWidth={fullWidth}
+      error={error}
       sx={{ width: fullWidth ? "fit-content" : "100%", ...sx }}
     >
       {children}
