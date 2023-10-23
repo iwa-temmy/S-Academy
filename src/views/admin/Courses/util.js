@@ -61,3 +61,10 @@ export const COURSES_DATA = [
     published: false,
   },
 ];
+export const ABOUT_CHAPTER_VALIDATIONS = {
+  about: {
+    name: "About",
+    required: true,
+    min: 10,
+  },
+};

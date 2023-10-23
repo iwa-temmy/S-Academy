@@ -10,7 +10,7 @@ import AuhComponent from "./components/AuthComponent";
 import Notification from "../../components/Notification";
 
 // Redux
-import { ForgetPassword } from "../../redux/userSlice";
+import { ForgetPassword } from "../../redux/slices/userSlice";
 import useValidation from "../../hooks/useFormValidation";
 import { RESET_PASSWORD_VALIDATIONS } from "./util";
 

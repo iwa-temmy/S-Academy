@@ -1,8 +1,10 @@
 import { Stack, Typography, Box } from "@mui/material";
 import { useTheme } from "@mui/styles";
 import AppButton from "../../../../components/AppButton";
-const EmptyChapter = () => {
+const EmptyChapter = (props) => {
   const theme = useTheme();
+
+  const { addCourseChapter } = props;
   return (
     <Stack
       direction="column"
@@ -39,7 +41,12 @@ const EmptyChapter = () => {
           After adding a chapter, proceed to adding content in those chapters
         </Typography>
       </Box>
-      <AppButton variant="contained" color="primary" name="Add chapter" />
+      <AppButton
+        variant="contained"
+        color="primary"
+        name="Add chapter"
+        onClick={addCourseChapter}
+      />
     </Stack>
   );
 };

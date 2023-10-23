@@ -9,7 +9,7 @@ import {
   Box,
 } from "@mui/material";
 import { Login } from "@mui/icons-material";
-import { Logout } from "../../../../redux/userSlice";
+import { Logout } from "../../../../redux/slices/userSlice";
 
 // core components
 import AppMenuItem from "../../../app-menu/AppMenuItem";
@@ -52,9 +52,7 @@ const UserMenu = (props) => {
     >
       <MenuList sx={{ p: 0 }}>
         <ListItem>
-          <ListItemAvatar>
-            {/* <UserAvatar /> */}
-          </ListItemAvatar>
+          <ListItemAvatar>{/* <UserAvatar /> */}</ListItemAvatar>
           <ListItemText
             primary="Kolade"
             // secondary={user?.email}

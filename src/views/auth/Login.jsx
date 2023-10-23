@@ -12,7 +12,7 @@ import AuhComponent from "./components/AuthComponent";
 import Notification from "../../components/Notification";
 
 // Redux
-import { LoginUser, getUser } from "../../redux/userSlice";
+import { LoginUser, getUser } from "../../redux/slices/userSlice";
 
 // Utils
 import { setToken, setType } from "../../utils";

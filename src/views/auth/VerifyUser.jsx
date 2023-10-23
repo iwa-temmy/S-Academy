@@ -12,7 +12,11 @@ import Notification from "../../components/Notification";
 import AppOptInput from "../../components/AppOptInput";
 
 // Redux
-import { VerifyLoggedInUser, ResendOtp, getUser } from "../../redux/userSlice";
+import {
+  VerifyLoggedInUser,
+  ResendOtp,
+  getUser,
+} from "../../redux/slices/userSlice";
 
 // Utils
 import { parseQuery } from "../../utils";

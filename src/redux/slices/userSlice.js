@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { baseUrl } from "../config";
-import { endSession } from "../utils";
-import axiosInstance from "../utils/https";
+import { baseUrl } from "../../config";
+import { endSession } from "../../utils";
+import axiosInstance from "../../utils/https";
 
 export const userSlice = createSlice({
   name: "userSlice",

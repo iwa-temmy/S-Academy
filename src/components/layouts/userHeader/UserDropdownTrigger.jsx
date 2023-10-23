@@ -14,7 +14,7 @@ import {
 import { ExpandMore } from "@mui/icons-material";
 import AppMenuItem from "../../app-menu/AppMenuItem";
 import UserAvatar from "./menus/UserAvatar";
-import { Logout } from "../../../redux/userSlice";
+import { Logout } from "../../../redux/slices/userSlice";
 import Notification from "../../Notification";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";

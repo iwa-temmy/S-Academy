@@ -9,7 +9,7 @@ import {
   Box,
 } from "@mui/material";
 import { Login } from "@mui/icons-material";
-import { Logout } from "../../../../redux/userSlice";
+import { Logout } from "../../../../redux/slices/userSlice";
 
 // core components
 import AppMenuItem from "../../../app-menu/AppMenuItem";

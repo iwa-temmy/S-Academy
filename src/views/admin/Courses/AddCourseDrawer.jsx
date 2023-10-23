@@ -9,11 +9,10 @@ const AddCourseDrawer = (props) => {
   const { open, handleClose } = props;
 
   const toNextStep = () => setActiveStep((current) => current + 1);
-  const toPreviousStep = () => setActiveStep((current) => current - 1);
 
   const closeAll = () => {
     handleClose();
-    toPreviousStep();
+    setActiveStep(1);
   };
   return (
     <AppDrawer
@@ -25,7 +24,7 @@ const AddCourseDrawer = (props) => {
       {activeStep === 1 ? (
         <AddCourseDetails toNextStep={toNextStep} />
       ) : (
-        <AddCourseContent />
+        <AddCourseContent courseId={1} />
       )}
     </AppDrawer>
   );

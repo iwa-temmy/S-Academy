@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Stack, Typography } from "@mui/material";
 import { AddCircleOutlineOutlined } from "@mui/icons-material";
 import AppTable from "../../../components/app-table";
@@ -11,6 +11,9 @@ import AppButton from "../../../components/AppButton";
 import AppTag from "../../../components/AppTag";
 import { formatAmount } from "../../../utils";
 import AddCourseDrawer from "./AddCourseDrawer";
+import { GetAllCourses } from "../../../redux/slices/adminCourseSlice";
+
+import { useDispatch, useSelector } from "react-redux";
 
 const NO_PER_PAGE = 8;
 const Courses = () => {
@@ -21,6 +24,8 @@ const Courses = () => {
   const [filters, setFilters] = useState({ level: "", tutor: "", status: "" });
   const [addDrawerOpen, setAddDrawerOpen] = useState(false);
 
+  const dispatch = useDispatch();
+  const courses = useSelector((state) => state?.courses?.all_courses);
   const { data, handleSearch } = useSearch(COURSES_DATA, ["name"]);
 
   //functions
@@ -34,7 +39,7 @@ const Courses = () => {
     setSelected(set);
   };
   const toggleAllSelected = () => {
-    const set = new Set(COURSES_DATA.map((course) => course?.id));
+    const set = new Set(COURSES_DATA?.map((course) => course?.id));
     if (selected.size) {
       set.clear();
     }
@@ -144,6 +149,10 @@ const Courses = () => {
       ),
     },
   ];
+
+  useEffect(() => {
+    dispatch(GetAllCourses());
+  }, [dispatch]);
   return (
     <>
       <Stack sx={{ p: 3, flex: 1 }}>

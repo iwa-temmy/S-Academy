@@ -8,11 +8,19 @@ import {
 import { Close } from "@mui/icons-material";
 import { useTheme } from "@mui/styles";
 const AppModal = (props) => {
-  const { open, handleClose, title, hasCloseBtn, children } = props;
+  const { open, handleClose, title, hasCloseBtn, children, sx } = props;
 
   const theme = useTheme();
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      sx={{
+        "& .MuiDialog-paper": {
+          ...sx.paper,
+        },
+      }}
+    >
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -35,7 +43,7 @@ const AppModal = (props) => {
         </DialogTitle>
         {hasCloseBtn && (
           <IconButton
-            sx={{ py: 1, color: theme.palette.neutral[60], }}
+            sx={{ py: 1, color: theme.palette.neutral[60] }}
             onClick={handleClose}
           >
             <Close />

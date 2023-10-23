@@ -13,7 +13,7 @@ import AuhComponent from "./components/AuthComponent";
 import Notification from "../../components/Notification";
 
 // Redux
-import { RegisterUser, getUser } from "../../redux/userSlice";
+import { RegisterUser, getUser } from "../../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
 
 const UserLogin = () => {

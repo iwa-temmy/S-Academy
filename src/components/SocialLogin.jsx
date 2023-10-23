@@ -11,7 +11,7 @@ import {
   browserLocalPersistence,
   // signOut,
 } from "firebase/auth";
-import { GoogleLogin, getUser } from "../redux/userSlice";
+import { GoogleLogin, getUser } from "../redux/slices/userSlice";
 import { toast } from "react-toastify";
 import Notification from "../components/Notification";
 import { useDispatch } from "react-redux";

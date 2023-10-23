@@ -1,24 +1,25 @@
-import { useState } from "react";
-import { Box } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useTheme } from "@mui/styles";
-import AccordionItem from "./AccordionItem";
 
-const Accordion = () => {
-  const [isActive, setIsActive] = useState(false);
+const Accordion = (props) => {
+  const { children } = props;
 
   const theme = useTheme();
   return (
-    <Box
+    <Grid
+      container
+      columnSpacing={4}
       sx={{
         border: `1px solid ${theme.palette.gray[90]}`,
         width: "100%",
         px: 3,
-        py: 1,
+        my: 1,
+        mx: 0,
         borderRadius: "8px",
       }}
     >
-      <AccordionItem isActive={isActive} onChange={() => setIsActive(true)} />
-    </Box>
+      {children}
+    </Grid>
   );
 };
 

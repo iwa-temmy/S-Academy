@@ -3,13 +3,12 @@ import { AppForm, AppFormInput } from "../../components/forms";
 import { toast } from "react-toastify";
 import Notification from "../../components/Notification";
 import AuhComponent from "./components/AuthComponent";
-import { Box, useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ResetPassword } from "../../redux/userSlice";
+import { ResetPassword } from "../../redux/slices/userSlice";
 
 const UserResetPassword = () => {
-  const theme = useTheme();
   const { search } = useLocation();
   const navigate = useNavigate();
   // states
