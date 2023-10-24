@@ -10,6 +10,9 @@ import AppButton from "../../../../components/AppButton";
 import CourseContentModalActions from "./CourseContentModalActions";
 import AddContentMenu from "./AddContentMenu";
 import AboutChapterModal from "./AboutChapterModal";
+import VideoUploadModal from "./VideoUploadModal";
+import EmbedVideoUrlModal from "./EmbedVideoUrlModal";
+import DownloadableDocModal from "./DownloadableDocModal";
 
 const AddCourseContent = ({ courseId }) => {
   const theme = useTheme();
@@ -19,6 +22,10 @@ const AddCourseContent = ({ courseId }) => {
   const [activeChapter, setActiveChapter] = useState(null);
   const [accordionOpen, setAccordionOpen] = useState({});
   const [modalOpen, setModalOpen] = useState(null);
+  const [videoUploadModal, setVideoUploadModal] = useState(false);
+  const [embedVideoModal, setEmbedVideoModal] = useState(false);
+  const [videoSource, setVideoSource] = useState("");
+  const [downloadableDocModal, setDownloadableDocModal] = useState(false);
 
   //functions
   const saveChapterName = (e, index) => {
@@ -57,6 +64,32 @@ const AddCourseContent = ({ courseId }) => {
     setActiveChapter(null);
   };
 
+  const openVideoUploadModal = (data) => {
+    setVideoUploadModal(true);
+    setActiveChapter(data);
+  };
+  const closeVideoUploadModal = () => {
+    setVideoUploadModal(false);
+    setActiveChapter(null);
+  };
+  const openEmbedVideoModal = (source, data) => {
+    setEmbedVideoModal(true);
+    setVideoSource(source);
+    setActiveChapter(data);
+  };
+  const closeEmbedVideoModal = () => {
+    setEmbedVideoModal(false);
+    setVideoSource("");
+    setActiveChapter(null);
+  };
+  const openDownloadableDocModal = (data) => {
+    setDownloadableDocModal(true);
+    setActiveChapter(data);
+  };
+  const closeDownloadableDocModal = () => {
+    setDownloadableDocModal(false);
+    setActiveChapter(null);
+  };
   useEffect(() => {
     if (chapters?.length) {
       chapters?.forEach((chapter, index) => {
@@ -70,69 +103,76 @@ const AddCourseContent = ({ courseId }) => {
       {chapters?.length ? (
         <Box sx={{ p: 2 }}>
           {chapters?.map((chapter, index) => (
-            <Accordion key={index}>
-              <AccordionItem
-                title={
-                  <>
-                    <span className="text-sm font-semibold text-[#46464A] pr-1">
-                      {chapter.number} .
-                    </span>
-                    <input
-                      name="name"
-                      className="text-sm font-semibold text-[#919094] outline-none"
-                      placeholder="Type Chapter name"
-                      onChange={(e) => saveChapterName(e, index)}
-                      value={chapter?.name}
-                    />
-                  </>
-                }
-                isActive={accordionOpen[index]}
-                onChange={() => handlAccordionToggle(index)}
-                actions={
-                  <>
-                    <AppButton
-                      variant="text"
-                      color="secondary"
-                      startIcon={<FiEdit size="10px" />}
-                      sx={{
-                        fontSize: 10,
-                        minWidth: "unset",
-                        fontWeight: 500,
-                        p: 0,
-                        "&:hover": {
-                          backgroundColor: "transparent !important",
-                        },
-                      }}
-                      onClick={() => openModal("write", chapter)}
-                      name="Write about chapter"
-                    />
-                    <IconButton
-                      aria-label="delete"
-                      sx={{
-                        minWidth: "unset",
-                        fontSize: 20,
-                        p: 0,
-                        color: theme.palette.error[60],
-                      }}
-                    >
-                      <HiOutlineTrash />
-                    </IconButton>
-                  </>
-                }
-                content={
-                  <Stack direction="column" alignItems="flex-start">
-                    <AddContentMenu chapter={chapter} />
-                  </Stack>
-                }
+            <>
+              <Accordion key={index}>
+                <AccordionItem
+                  title={
+                    <>
+                      <span className="text-sm font-semibold text-[#46464A] pr-1">
+                        {chapter.number} .
+                      </span>
+                      <input
+                        name="name"
+                        className="text-sm font-semibold text-[#919094] outline-none"
+                        placeholder="Type Chapter name"
+                        onChange={(e) => saveChapterName(e, index)}
+                        value={chapter?.name}
+                      />
+                    </>
+                  }
+                  isActive={accordionOpen[index]}
+                  onChange={() => handlAccordionToggle(index)}
+                  actions={
+                    <>
+                      <AppButton
+                        variant="text"
+                        color="secondary"
+                        startIcon={<FiEdit size="10px" />}
+                        sx={{
+                          fontSize: 10,
+                          minWidth: "unset",
+                          fontWeight: 500,
+                          p: 0,
+                          "&:hover": {
+                            backgroundColor: "transparent !important",
+                          },
+                        }}
+                        onClick={() => openModal("write", chapter)}
+                        name="Write about chapter"
+                      />
+                      <IconButton
+                        aria-label="delete"
+                        sx={{
+                          minWidth: "unset",
+                          fontSize: 20,
+                          p: 0,
+                          color: theme.palette.error[60],
+                        }}
+                      >
+                        <HiOutlineTrash />
+                      </IconButton>
+                    </>
+                  }
+                  content={
+                    <Stack direction="column" alignItems="flex-start">
+                      <AddContentMenu
+                        chapter={chapter}
+                        openVideoUploadModal={openVideoUploadModal}
+                        openEmbedVideoModal={openEmbedVideoModal}
+                        openDownloadableDocModal={openDownloadableDocModal}
+                      />
+                    </Stack>
+                  }
+                />
+              </Accordion>
+              <CourseContentModalActions
+                addCourseChapter={addCourseChapter}
+                deleteLastChapter={deleteLastChapter}
+                chapters={chapters}
+                index={index}
               />
-            </Accordion>
+            </>
           ))}
-
-          <CourseContentModalActions
-            addCourseChapter={addCourseChapter}
-            deleteLastChapter={deleteLastChapter}
-            chapters={chapters}
-          />
         </Box>
       ) : (
         <EmptyChapter addCourseChapter={addCourseChapter} />
@@ -141,6 +181,22 @@ const AddCourseContent = ({ courseId }) => {
       <AboutChapterModal
         open={modalOpen === "write"}
         handleClose={closeModal}
+      />
+      <VideoUploadModal
+        open={videoUploadModal}
+        handleClose={closeVideoUploadModal}
+        activeChapter={activeChapter}
+      />
+      <EmbedVideoUrlModal
+        open={embedVideoModal}
+        handleClose={closeEmbedVideoModal}
+        source={videoSource}
+        activeChapter={activeChapter}
+      />
+      <DownloadableDocModal
+        open={downloadableDocModal}
+        handleClose={closeDownloadableDocModal}
+        activeChapter={activeChapter}
       />
     </div>
   );

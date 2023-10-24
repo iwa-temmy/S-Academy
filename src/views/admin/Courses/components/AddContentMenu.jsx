@@ -21,7 +21,7 @@ import { TiSocialVimeoCircular } from "react-icons/ti";
 import AppButton from "../../../../components/AppButton";
 
 const AddContentMenu = (props) => {
-  const { chapter } = props;
+  const { chapter, openVideoUploadModal, openEmbedVideoModal, openDownloadableDocModal } = props;
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const anchorRef = useRef(null);
@@ -116,7 +116,7 @@ const AddContentMenu = (props) => {
                   <CustomMenuItem
                     startIcon={<SlowMotionVideo />}
                     onClick={(e) => {
-                      console.log(chapter);
+                      openVideoUploadModal(chapter?.number);
                       handleClose(e);
                     }}
                     name="Video upload from computer"
@@ -125,7 +125,7 @@ const AddContentMenu = (props) => {
                     startIcon={<AiOutlineYoutube size="24px" />}
                     name="Embedded youtube video"
                     onClick={(e) => {
-                      console.log(chapter);
+                      openEmbedVideoModal("youtube", chapter);
                       handleClose(e);
                     }}
                   />
@@ -133,7 +133,7 @@ const AddContentMenu = (props) => {
                     startIcon={<TiSocialVimeoCircular size="24px" />}
                     name="Embedded vimeo video"
                     onClick={(e) => {
-                      console.log(chapter);
+                      openEmbedVideoModal("vimeo", chapter);
                       handleClose(e);
                     }}
                   />
@@ -148,7 +148,7 @@ const AddContentMenu = (props) => {
                   <CustomMenuItem
                     startIcon={<img src="/icons/documentOutlineIcon.svg" />}
                     onClick={(e) => {
-                      console.log(chapter);
+                      openDownloadableDocModal(chapter);
                       handleClose(e);
                     }}
                     name="Downloadable Docs"

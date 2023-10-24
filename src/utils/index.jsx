@@ -106,3 +106,32 @@ export const fileToBase64 = (file) => {
 export const requestsHasError = (responses) => {
   return responses?.some((response) => !response.success);
 };
+export const getVideoDuration = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const media = new Audio(reader.result);
+      media.onloadedmetadata = () => resolve(media.duration);
+    };
+    reader.readAsDataURL(file);
+    reader.onerror = (error) => reject(error);
+  });
+
+export const fancyTimeFormat = (duration) => {
+  // Hours, minutes and seconds
+  const hrs = ~~(duration / 3600);
+  const mins = ~~((duration % 3600) / 60);
+  const secs = ~~duration % 60;
+
+  // Output like "1:01" or "4:03:59" or "123:03:59"
+  let ret = "";
+
+  if (hrs > 0) {
+    ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+  }
+
+  ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+  ret += "" + secs;
+
+  return ret;
+};

@@ -8,6 +8,7 @@ const AppDragAndDrop = (props) => {
   const {
     label,
     icon,
+    type,
     sx = {},
     error,
     draggerProps = {},
@@ -72,8 +73,9 @@ const AppDragAndDrop = (props) => {
             />
           )}
           <div>
-            <span className="font-semibold">Click to upload</span> or drag and
-            drop a file
+            <span className="font-semibold">Click to upload</span>{" "}
+            {`or drag and
+            drop a ${type}`}
           </div>
           <Typography
             sx={{
@@ -82,7 +84,7 @@ const AppDragAndDrop = (props) => {
               color: theme.palette.gray[70],
             }}
           >
-            PNG or JPEG
+            {type === "video" ? "MP4, MKV" : "PNG or JPEG"}
           </Typography>
         </Box>
       </Box>

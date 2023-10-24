@@ -6,12 +6,12 @@ import TableAction from "../../../components/app-table/TableAction";
 import AppFilterSelect from "../../../components/app-table/AppFilterSelect";
 import AppCheckbox from "../../../components/AppCheckbox";
 import useSearch from "../../../hooks/useSearch";
-import { LEVEL_OPTIONS, COURSES_DATA } from "./util";
+import { LEVEL_OPTIONS } from "./util";
 import AppButton from "../../../components/AppButton";
 import AppTag from "../../../components/AppTag";
 import { formatAmount } from "../../../utils";
 import AddCourseDrawer from "./AddCourseDrawer";
-import { GetAllCourses } from "../../../redux/slices/adminCourseSlice";
+import { fetchCourses } from "../../../redux/slices/adminCourseSlice";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,14 +19,14 @@ const NO_PER_PAGE = 8;
 const Courses = () => {
   // state
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState({ content: false, delete: false });
   const [selected, setSelected] = useState(new Set());
   const [filters, setFilters] = useState({ level: "", tutor: "", status: "" });
   const [addDrawerOpen, setAddDrawerOpen] = useState(false);
 
   const dispatch = useDispatch();
-  const courses = useSelector((state) => state?.courses?.all_courses);
-  const { data, handleSearch } = useSearch(COURSES_DATA, ["name"]);
+  const courses = useSelector((state) => state?.courses?.courses);
+  const fetching = useSelector((state) => state?.courses?.status?.fetching);
+  const { data, handleSearch } = useSearch(courses, ["name"]);
 
   //functions
   const toggleRowSelect = (id) => {
@@ -39,7 +39,7 @@ const Courses = () => {
     setSelected(set);
   };
   const toggleAllSelected = () => {
-    const set = new Set(COURSES_DATA?.map((course) => course?.id));
+    const set = new Set(courses?.map((course) => course?.id));
     if (selected.size) {
       set.clear();
     }
@@ -61,12 +61,12 @@ const Courses = () => {
     {
       title: (
         <AppCheckbox
-          checked={selected.size === COURSES_DATA?.length}
+          checked={selected.size === courses?.length}
           indeterminate={
-            Boolean(selected.size) && selected.size !== COURSES_DATA?.length
+            Boolean(selected.size) && selected.size !== courses?.length
           }
           onChange={toggleAllSelected}
-          disabled={!COURSES_DATA?.length}
+          disabled={!courses?.length}
         />
       ),
       className: "w-12",
@@ -151,7 +151,7 @@ const Courses = () => {
   ];
 
   useEffect(() => {
-    dispatch(GetAllCourses());
+    dispatch(fetchCourses());
   }, [dispatch]);
   return (
     <>
@@ -162,9 +162,9 @@ const Courses = () => {
           title="All courses"
           page={page}
           noPerPage={NO_PER_PAGE}
-          dataLength={COURSES_DATA?.length}
+          dataLength={courses?.length}
           onPageChange={setPage}
-          loading={loading.content}
+          loading={fetching === "loading"}
           onSearch={handleSearch}
           filterActions={
             <>

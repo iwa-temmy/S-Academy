@@ -17,7 +17,7 @@ const AppModal = (props) => {
       onClose={handleClose}
       sx={{
         "& .MuiDialog-paper": {
-          ...sx.paper,
+          ...sx?.paper,
         },
       }}
     >

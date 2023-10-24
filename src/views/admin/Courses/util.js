@@ -68,3 +68,34 @@ export const ABOUT_CHAPTER_VALIDATIONS = {
     min: 10,
   },
 };
+
+export const VIDEO_UPLOAD_VALIDATIONS = {
+  name: {
+    name: "Topic",
+    required: true,
+    min: 10,
+  },
+  video_upload: {
+    name: "Video",
+    required: true,
+  },
+};
+
+export const EMBED_VIDEO_URL_VALIDATIONS = {
+  name: {
+    name: "Topic",
+    required: true,
+    min: 10,
+  },
+  url: {
+    name: "Video Url",
+    required: true,
+  },
+};
+export const DOWNLOADABLE_DOC_VALIDATIONS = {
+  name: {
+    name: "Document name",
+    required: true,
+    min: 10,
+  },
+};

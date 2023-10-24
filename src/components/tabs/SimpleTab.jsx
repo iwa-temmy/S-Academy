@@ -18,7 +18,7 @@ const SimpleTab = ({
   handleRemoveSearch,
   value,
   search,
-  sx
+  sx,
 }) => {
   function a11yProps(index) {
     return {
@@ -64,10 +64,11 @@ const SimpleTab = ({
                 sx={{
                   textTransform: "capitalize",
                   fontSize: "12px",
+                  whiteSpace: "nowrap",
                   fontWeight: 500,
                   px: 0,
                   minWidth: "50px",
-                  maxWidth: "120px",
+                  maxWidth: "fit-content",
                   mx: 1.5,
                   "&.Mui-selected": {
                     color: "#395BA9",
@@ -77,30 +78,31 @@ const SimpleTab = ({
             );
           })}
         </Tabs>
-        {search &&
-        <TextField
-          variant="standard"
-          placeholder="Type to search..."
-          value={value}
-          onChange={handleChange}
-          sx={{ marginRight: 4, width: "200px" }}
-          InputProps={{
-            disableUnderline: true,
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="end">
-                <CancelIcon
-                  sx={{ width: "15px", height: "15px", cursor: "pointer" }}
-                  onClick={handleRemoveSearch}
-                />
-              </InputAdornment>
-            ),
-          }}
-        />}
+        {search && (
+          <TextField
+            variant="standard"
+            placeholder="Type to search..."
+            value={value}
+            onChange={handleChange}
+            sx={{ marginRight: 4, width: "200px" }}
+            InputProps={{
+              disableUnderline: true,
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  <CancelIcon
+                    sx={{ width: "15px", height: "15px", cursor: "pointer" }}
+                    onClick={handleRemoveSearch}
+                  />
+                </InputAdornment>
+              ),
+            }}
+          />
+        )}
       </Box>
       <Divider sx={{ mt: "-0.1rem", mx: 4.3 }} />
     </Box>

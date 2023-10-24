@@ -54,6 +54,7 @@ const AddCourseDetails = (props) => {
           <AppDragAndDrop
             label="Course Image (Landscape view)"
             accepts={["images"]}
+            type="file"
             draggerProps={{ onChange: onFileUploadChange }}
             error={showError("image")}
           />

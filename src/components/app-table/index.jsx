@@ -5,9 +5,9 @@ import TableTopbar from "./TableTopbar";
 import TableHeader from "./TableHeader";
 import AppTableBody from "./AppTableBody";
 import AppTablePagination from "./AppTablePagination";
-import AppCard from "../cards/AppCard";
 import AppTabsBar from "../tabs/AppTabsBar";
 import AppTab from "../tabs/AppTab";
+import AppCard from "../cards/AppCard";
 
 const AppTable = (props) => {
   const theme = useTheme();

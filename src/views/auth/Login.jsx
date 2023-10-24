@@ -84,7 +84,7 @@ const UserLogin = () => {
               fontSize: "12px",
               pt: 1.5,
             }}
-            to="/auth/forget-password"
+            to="/auth/forgot-password"
           >
             Forgot password
           </Typography>
