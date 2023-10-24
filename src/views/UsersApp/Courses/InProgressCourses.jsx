@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/styles";
 import React from "react";
-import AppCard from "../../../components/cards/AppCard";
+import AppCard from "../../../components/Cards/AppCard";
 import AppProgressBar from "../../../components/AppProgressBar";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { useNavigate } from "react-router-dom";

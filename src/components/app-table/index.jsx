@@ -7,7 +7,7 @@ import AppTableBody from "./AppTableBody";
 import AppTablePagination from "./AppTablePagination";
 import AppTabsBar from "../tabs/AppTabsBar";
 import AppTab from "../tabs/AppTab";
-import AppCard from "../cards/AppCard";
+import AppCard from "../Cards/AppCard";
 
 const AppTable = (props) => {
   const theme = useTheme();

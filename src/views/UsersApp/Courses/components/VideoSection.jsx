@@ -2,7 +2,7 @@ import { Box, CardContent, CardMedia, Typography } from "@mui/material";
 import React, { useRef, useState } from "react";
 import SimpleTab from "../../../../components/tabs/SimpleTab";
 import CustomTabPanel from "../../../../components/tabs/CustomTabPanel";
-import AppCard from "../../../../components/cards/AppCard";
+import AppCard from "../../../../components/Cards/AppCard";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";

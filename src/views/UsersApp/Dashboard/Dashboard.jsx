@@ -3,7 +3,7 @@ import { useTheme } from "@mui/styles";
 import React from "react";
 import { Data } from "../data";
 import VerifiedIcon from "@mui/icons-material/Verified";
-import AppCard from "../../../components/cards/AppCard";
+import AppCard from "../../../components/Cards/AppCard";
 
 const Dashbard = () => {
   const theme = useTheme();
